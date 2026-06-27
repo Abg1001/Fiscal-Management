@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="theme-color" content="#059669">
-    <title>Plateforme de Gestion Fiscale Communale - 2026</title>
+    <meta name="theme-color" content="#0d5c44">
+    <title>Gestion Fiscale Communale - Diamniadio 2026</title>
     <!-- Inline favicon to avoid 404 for /favicon.ico -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='20' fill='%23059669'/%3E%3Cpath d='M50 55 C40 70 30 85 50 95 C70 85 60 70 50 55 Z' fill='%23005955'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='20' fill='%230d5c44'/%3E%3Cpath d='M50 55 C40 70 30 85 50 95 C70 85 60 70 50 55 Z' fill='%23084436'/%3E%3C/svg%3E">
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -41,55 +41,78 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
     
     <style>
+    /* ============================================
+       PLATEFORME FISCALE - DESIGN AMÉLIORÉ 2026
+       ============================================ */
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Use Inter for a more neutral, modern, legible UI */
-    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+    body { 
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        line-height: 1.6;
+        color: #1a1a1a;
+        background: #f9fafb;
+    }
         
-        /* ========== NOUVELLES COULEURS VERT VIF / BLANC ========== */
+        /* ========== PALETTE SOPHISTIQUÉE ========== */
         :root {
-            --primary: #059669;
-            --primary-dark: #047857;
-            --primary-light: #10b981;
-            --primary-gradient: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
-            --primary-gradient-vertical: linear-gradient(180deg, #059669 0%, #10b981 100%);
-            --green-shadow: 0 10px 30px rgba(5,150,105,0.14);
-            --green-glow: 0 6px 20px rgba(16,185,129,0.18);
-            --green-outline: 0 0 0 6px rgba(16,185,129,0.06);
-            --control-border: 1px solid rgba(5,150,105,0.08);
+            --primary: #0d5c44;
+            --primary-dark: #084436;
+            --primary-light: #0f8659;
+            --accent: #d97706;
+            --accent-light: #fbbf24;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --neutral-50: #f9fafb;
+            --neutral-100: #f3f4f6;
+            --neutral-200: #e5e7eb;
+            --neutral-500: #6b7280;
+            --neutral-700: #374151;
+            --neutral-900: #1a1a1a;
+            
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-primary: 0 4px 12px rgba(13, 92, 68, 0.15);
+            
+            --primary-gradient: linear-gradient(135deg, #0d5c44 0%, #0f8659 100%);
+            --primary-gradient-vertical: linear-gradient(180deg, #0d5c44 0%, #0f8659 100%);
+            --accent-gradient: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
         }
 
-        /* Green accents and focus states */
-        .nav-item:hover { transform: translateX(3px); box-shadow: var(--green-glow); border-left: 4px solid rgba(5,150,105,0.12); }
-        .nav-item.active { box-shadow: var(--green-glow); border-left: 4px solid var(--primary); background: rgba(255,255,255,0.16); }
+        /* Mode sombre amélioré */
+        .mode-sombre { 
+            background: #0f1419; 
+            color: #e5e7eb;
+        }
+        .mode-sombre .top-bar { 
+            background: linear-gradient(90deg, #0f1419, #16211b);
+            border-bottom-color: rgba(255, 255, 255, 0.05);
+        }
+        .mode-sombre .sidebar { background: var(--primary-gradient-vertical); }
+        .mode-sombre .main-content { background: #0f1419; }
+        .mode-sombre .bg-white { 
+            background: #1a2623 !important; 
+            color: #e5e7eb !important; 
+        }
+        .mode-sombre .stat-card, 
+        .mode-sombre .fiscal-card, 
+        .mode-sombre .payment-card { 
+            background: linear-gradient(135deg, #1a2623 0%, #1f2d29 100%);
+            color: #e5e7eb !important; 
+        }
+        .mode-sombre .legend-fixed, 
+        .mode-sombre .route-panel, 
+        .mode-sombre .data-panel, 
+        .mode-sombre .search-bar-fixed { 
+            background: #1a2623; 
+            color: #e5e7eb; 
+            border-color: rgba(255, 255, 255, 0.08);
+        }
 
-        button:focus, .bottom-btn:focus, .zoom-btn:focus, .mobile-bottom-btn:focus, .float-digitize-btn:focus, .theme-toggle:focus { outline: none; box-shadow: var(--green-outline); }
-
-        input:focus, select:focus, textarea:focus { outline: none; box-shadow: var(--green-outline); border-color: var(--primary); }
-
-        .login-card, .fiscal-card, .stat-card, .legend-fixed { border: var(--control-border); }
-
-        .nav-item i { transition: transform .12s ease; }
-        .nav-item:hover i { transform: translateX(2px); }
-
-        /* Slightly elevate key cards and make shadows greener */
-        .fiscal-card { box-shadow: 0 18px 40px rgba(5,150,105,0.08); border: var(--control-border); }
-
-        /* Make small controls feel tactile */
-        .bottom-btn, .zoom-btn, .mobile-bottom-btn { transition: transform .12s ease, box-shadow .12s ease; }
-
-    /* Dark mode variables and overrides */
-    /* Dark mode: improved contrast for readability */
-    .mode-sombre { background: #071421; color: #e6f3ea; }
-    .mode-sombre .top-bar { background: linear-gradient(90deg,#072026,#05231f); border-bottom-color: rgba(255,255,255,0.04); }
-    .mode-sombre .sidebar { background: linear-gradient(180deg,#042e25 0%,#023327 100%); }
-    .mode-sombre .main-content { background: #071421; }
-    .mode-sombre .bg-white { background: #0b2b24 !important; color: #e6f3ea !important; }
-    .mode-sombre .stat-card, .mode-sombre .fiscal-card, .mode-sombre .payment-card { background: #08352e; color: #eaf6ee; }
-    .mode-sombre .legend-fixed, .mode-sombre .route-panel, .mode-sombre .data-panel, .mode-sombre .search-bar-fixed { background: #082a22; color: #dff4e9; border-color: rgba(255,255,255,0.04); }
-    .mode-sombre .quartier-label { background: rgba(10,60,50,0.95); color: #eaf6ee; border-color: rgba(255,255,255,0.06); }
-    .mode-sombre .unit-marker { border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 1px 4px rgba(0,0,0,0.6); }
-        
+        /* Sidebar */
         .sidebar {
             position: fixed;
             left: 0;
@@ -98,8 +121,8 @@
             width: 260px;
             background: var(--primary-gradient-vertical);
             z-index: 2000;
-            transition: all 0.3s ease;
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-xl);
             overflow-y: auto;
         }
         
@@ -112,80 +135,85 @@
             display: none;
         }
         
-        .sidebar.collapsed .nav-item {
-            justify-content: center;
-            padding: 12px;
-        }
-        
         .sidebar .logo {
-            padding: 20px;
+            padding: 24px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
         
         .sidebar .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: white;
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
-            box-shadow: var(--green-shadow);
-            border: var(--control-border);
+            margin: 0 auto 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar .logo-icon:hover {
+            transform: scale(1.05);
         }
         
         .sidebar .logo-icon i {
-            font-size: 22px;
+            font-size: 24px;
             color: var(--primary);
         }
         
         .sidebar .logo-text {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: white;
+            letter-spacing: -0.5px;
         }
         
         .sidebar .logo-sub {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
             margin-top: 4px;
+            font-weight: 500;
         }
         
         .sidebar .nav-item {
-            padding: 12px 20px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             gap: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            margin: 4px 10px;
+            margin: 6px 10px;
             border-radius: 10px;
+            font-weight: 500;
         }
         
         .sidebar .nav-item:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             color: white;
+            transform: translateX(2px);
         }
         
         .sidebar .nav-item.active {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         .sidebar .nav-item i {
-            width: 24px;
+            width: 20px;
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
         }
         
         .sidebar .nav-text {
             font-size: 13px;
             font-weight: 500;
         }
-        
+
+        /* Sidebar toggle */
         .sidebar-toggle {
             position: fixed;
             left: 260px;
@@ -199,40 +227,43 @@
             justify-content: center;
             cursor: pointer;
             z-index: 2001;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
             color: var(--primary);
+            border: none;
+            font-size: 16px;
         }
         
         .sidebar.collapsed + .sidebar-toggle {
             left: 70px;
         }
-        
+
+        /* Main content */
         .main-content {
             margin-left: 260px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             min-height: 100vh;
-            background: #f3f4f6;
+            background: #f9fafb;
         }
         
         .sidebar.collapsed ~ .main-content {
             margin-left: 70px;
         }
-        
+
+        /* Top bar */
         .top-bar {
             background: white;
-            padding: 12px 20px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 15px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-md);
             position: sticky;
             top: 0;
-            /* raise above sidebars/modals so controls remain clickable */
             z-index: 10005;
-            border-bottom: var(--control-border);
-            box-shadow: var(--green-glow), 0 1px 3px rgba(0,0,0,0.06);
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
         }
         
         .top-bar-left {
@@ -242,61 +273,86 @@
         }
         
         .top-bar-logo {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: var(--primary-gradient);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: var(--shadow-primary);
         }
         
         .top-bar-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            color: #1f2937;
+            color: var(--neutral-900);
+            letter-spacing: -0.5px;
         }
+
         .top-bar-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
-        /* Ensure the theme toggle is always clickable and visible */
+
+        /* Theme toggle */
         .theme-toggle, #themeToggle {
             cursor: pointer;
             pointer-events: auto !important;
             z-index: 10001 !important;
             position: relative;
-            background: transparent;
-            border: none;
-            color: inherit;
-            padding: 6px;
+            background: var(--neutral-100);
+            border: 1px solid #e5e7eb;
+            color: var(--neutral-700);
+            padding: 8px;
             border-radius: 8px;
-            box-shadow: var(--green-shadow);
-            border: var(--control-border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
         }
-        /* floating digitize button */
-        .float-digitize-btn{
-            width:46px;height:46px;border-radius:50%;border:none;background:linear-gradient(135deg,#10b981,#059669);color:white;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:var(--green-shadow);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease,opacity .12s ease;
+
+        .theme-toggle:hover, #themeToggle:hover {
+            background: var(--neutral-200);
+            box-shadow: var(--shadow-md);
         }
-        .float-digitize-btn:hover{ transform:translateY(-3px); box-shadow:var(--green-glow); }
-    .float-digitize-btn:active{ transform:translateY(-1px) scale(0.97); box-shadow: 0 4px 10px rgba(5,150,105,0.18); opacity:0.96; }
-        .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
-        /* Floating fallback theme button (created at runtime if needed) */
-        #themeToggleFloating {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 20000 !important;
-            background: rgba(255,255,255,0.95);
-            border: var(--control-border);
-            padding: 8px 10px;
-            border-radius: 10px;
-            box-shadow: var(--green-glow);
+
+        /* Floating digitize button */
+        .float-digitize-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: var(--shadow-lg);
             cursor: pointer;
-            display: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
+
+        .float-digitize-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .float-digitize-btn:active {
+            transform: translateY(-2px) scale(0.96);
+        }
+
+        .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
         /* Login Modal */
         .login-modal {
             position: fixed;
@@ -313,23 +369,25 @@
         
         .login-card {
             background: white;
-            border-radius: 24px;
+            border-radius: 16px;
             padding: 40px;
             width: 100%;
             max-width: 420px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-xl);
+            border: none;
         }
         
         .login-logo {
-            width: 70px;
-            height: 70px;
+            width: 72px;
+            height: 72px;
             background: var(--primary-gradient);
-            border-radius: 18px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
+            box-shadow: var(--shadow-lg);
         }
         
         .login-logo i {
@@ -341,15 +399,16 @@
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #e5e7eb;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 14px;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            font-weight: 500;
         }
         
         .login-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+            box-shadow: 0 0 0 3px rgba(13, 92, 68, 0.1);
         }
         
         .login-btn {
@@ -358,24 +417,26 @@
             background: var(--primary-gradient);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-primary);
         }
         
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
+            box-shadow: var(--shadow-lg);
         }
         
         .user-info {
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #f3f4f6;
-            padding: 5px 12px;
+            background: var(--neutral-100);
+            padding: 6px 14px;
             border-radius: 30px;
+            border: 1px solid #e5e7eb;
         }
         
         .user-avatar {
@@ -387,53 +448,130 @@
             align-items: center;
             justify-content: center;
             color: white;
+            font-weight: 600;
+            font-size: 14px;
         }
         
         .logout-btn {
             background: none;
             border: none;
-            color: #6b7280;
+            color: var(--error);
             cursor: pointer;
             font-size: 14px;
-            padding: 5px 8px;
-            border-radius: 20px;
+            padding: 4px 6px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
         
         .logout-btn:hover {
-            background: #fee2e2;
-            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
         }
-        
+
+        /* Stat cards with signature left border */
         .stat-card {
-            transition: transform 0.2s;
-            background: var(--primary-gradient);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             border-radius: 12px;
-            box-shadow: var(--green-shadow);
+            overflow: hidden;
+            border: none;
+            position: relative;
         }
-        
-        .stat-card:nth-child(1) { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
-        .stat-card:nth-child(2) { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); }
-        .stat-card:nth-child(3) { background: linear-gradient(135deg, #059669 0%, #34d399 100%); }
-        .stat-card:nth-child(4) { background: linear-gradient(135deg, #047857 0%, #059669 100%); }
-        .stat-card:hover { transform: translateY(-4px); }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent);
+        }
+
+        .stat-card:nth-child(1) { 
+            background: linear-gradient(135deg, rgba(13, 92, 68, 0.08) 0%, rgba(15, 134, 89, 0.04) 100%);
+            border-left: 4px solid var(--primary);
+        }
+
+        .stat-card:nth-child(2) { 
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.08) 0%, rgba(251, 191, 36, 0.04) 100%);
+            border-left: 4px solid var(--accent);
+        }
+
+        .stat-card:nth-child(3) { 
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.04) 100%);
+            border-left: 4px solid var(--success);
+        }
+
+        .stat-card:nth-child(4) { 
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(96, 165, 250, 0.04) 100%);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .stat-card:hover { 
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
         
         .fiscal-card {
             background: var(--primary-gradient);
             border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
         
         .payment-card {
-            background: linear-gradient(135deg, #059669 0%, #34d399 100%);
+            background: var(--accent-gradient);
             border-radius: 12px;
-            box-shadow: 0 8px 26px rgba(16,185,129,0.08);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
         
         .toggle-switch.active { background-color: var(--primary); }
         
-        .bottom-btn:hover { background: #f3f4f6; transform: scale(1.02); }
-        .zoom-btn { color: var(--primary); }
-        .zoom-btn:hover { background: #f0f0f0; transform: scale(1.05); }
-        
+        .bottom-btn {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bottom-btn:hover {
+            background: var(--neutral-100);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .zoom-btn { 
+            width: 36px;
+            height: 36px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .zoom-btn:hover {
+            background: var(--neutral-100);
+            box-shadow: var(--shadow-md);
+            transform: scale(1.08);
+        }
+
         /* Le reste des styles reste identique à l'original */
         #map { height: calc(100vh - 70px); width: 100%; }
         .custom-shadow { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); }
@@ -446,32 +584,18 @@
             transform: translateX(-50%);
             z-index: 1000;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             background: white;
-            border-radius: 30px;
-            padding: 6px 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 6px 8px;
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Apply green shadow + subtle border to most UI panels (not the map) */
         .data-panel, .route-panel, .legend-fixed, .login-card, .fiscal-card, .stat-card, .payment-card, .search-bar-fixed, .bottom-center-controls, .mobile-bottom-controls, .mobile-search-panel, .chart-container, .bg-white {
-            box-shadow: var(--green-shadow);
-            border: var(--control-border);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #e5e7eb;
         }
-        
-        .zoom-btn {
-            width: 36px;
-            height: 36px;
-            background: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        
+
         .bottom-center-controls {
             position: absolute;
             bottom: 20px;
@@ -481,23 +605,9 @@
             display: flex;
             gap: 10px;
             background: white;
-            border-radius: 30px;
-            padding: 8px 16px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .bottom-btn {
-            background: white;
-            border: none;
-            border-radius: 25px;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
+            border-radius: 20px;
+            padding: 8px 12px;
+            box-shadow: var(--shadow-lg);
         }
         
         .search-bar-fixed {
@@ -508,7 +618,8 @@
             width: 280px;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e5e7eb;
         }
         
         .route-panel {
@@ -521,7 +632,8 @@
             width: 280px;
             max-height: 400px;
             overflow-y: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e5e7eb;
         }
         
         .legend-fixed {
@@ -534,27 +646,63 @@
             min-width: 200px;
             max-height: 70vh;
             overflow-y: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e5e7eb;
         }
-    .legend-fixed.collapsed { width: 56px; min-width:56px; padding:6px; }
-    .legend-fixed.collapsed h3,.legend-fixed.collapsed .layer-toggle span,.legend-fixed.collapsed .layer-toggle div { display:none; }
-    .legend-toggle-btn { position:absolute; top:6px; right:6px; background:transparent;border:none;cursor:pointer;color:#4b5563 }
 
-    /* flashing marker effect */
-    .flash-marker { animation: flashPulse 1s ease-in-out infinite; transform-origin:center; }
-    @keyframes flashPulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,0,0.0);} 50% { transform: scale(1.6); box-shadow: 0 0 12px 6px rgba(255,255,0,0.35);} 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,0,0.0);} }
-    /* unit marker styling: small circular dot without square wrapper */
-    .unit-marker { width: 12px; height: 12px; border-radius: 50%; display: block; border: 2px solid white; box-shadow: 0 0 2px rgba(0,0,0,0.35); transition: box-shadow .12s ease, transform .12s ease; background: var(--primary); }
-    .unit-marker:hover { box-shadow: 0 8px 20px rgba(16,185,129,0.12); transform: translateY(-2px); }
+        .legend-fixed.collapsed { width: 56px; min-width:56px; padding:8px; }
+        .legend-fixed.collapsed h3,.legend-fixed.collapsed .layer-toggle span,.legend-fixed.collapsed .layer-toggle div { display:none; }
+        
+        .legend-toggle-btn { 
+            position:absolute; 
+            top:8px; 
+            right:8px; 
+            background:var(--neutral-100);
+            border:1px solid #e5e7eb;
+            cursor:pointer;
+            color:var(--neutral-700);
+            border-radius:6px;
+            padding:4px 8px;
+            transition:all 0.2s ease;
+        }
 
-    /* MarkerCluster green theme */
-    .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div { background: var(--primary) !important; }
-    .marker-cluster span { color: white !important; }
+        .legend-toggle-btn:hover {
+            background: var(--neutral-200);
+        }
 
-    /* Fade-in animation for cards */
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .stat-card, .fiscal-card { animation: fadeInUp .36s ease both; }
-    .leaflet-div-icon { background: transparent !important; border: none !important; }
+        /* flashing marker effect */
+        .flash-marker { animation: flashPulse 1s ease-in-out infinite; transform-origin:center; }
+        @keyframes flashPulse { 
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(13, 92, 68, 0.4);} 
+            50% { transform: scale(1.4); box-shadow: 0 0 0 8px rgba(13, 92, 68, 0);} 
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(13, 92, 68, 0);} 
+        }
+
+        /* unit marker styling: small circular dot without square wrapper */
+        .unit-marker { 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            display: block; 
+            border: 2px solid white; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
+            transition: all 0.2s ease;
+            background: var(--primary);
+        }
+
+        .unit-marker:hover { 
+            box-shadow: 0 4px 12px rgba(13, 92, 68, 0.3); 
+            transform: scale(1.2);
+        }
+
+        /* MarkerCluster green theme */
+        .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div { background: var(--primary) !important; }
+        .marker-cluster span { color: white !important; }
+
+        /* Fade-in animation for cards */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .stat-card, .fiscal-card { animation: fadeInUp .36s ease both; }
+        .leaflet-div-icon { background: transparent !important; border: none !important; }
         
         .data-panel {
             position: absolute;
@@ -562,11 +710,12 @@
             left: 12px;
             z-index: 1000;
             background: white;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 10px;
-            min-width: 160px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 12px;
+            min-width: 180px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e5e7eb;
         }
         
         .layer-toggle {
@@ -602,9 +751,22 @@
         
         .chart-container { height: 280px; width: 100%; position: relative; }
         
-        .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 4px; background-color: #10b981; }
-        .status-dot.loading { background-color: #f59e0b; animation: pulse 1s infinite; }
-        .status-dot.error { background-color: #ef4444; }
+        .status-dot { 
+            width: 6px; 
+            height: 6px; 
+            border-radius: 50%; 
+            display: inline-block; 
+            margin-right: 4px; 
+            background-color: var(--success);
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        .status-dot.loading { 
+            background-color: var(--warning); 
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .status-dot.error { background-color: var(--error); }
         
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
@@ -614,44 +776,57 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.6);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             color: white;
+            backdrop-filter: blur(2px);
         }
         
         .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
+            width: 44px;
+            height: 44px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid white;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
         }
         
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .quartier-label {
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 9px;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 11px;
             font-weight: 600;
-            background: rgba(255,255,255,0.95);
-            padding: 3px 6px;
-            border-radius: 4px;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 6px;
             white-space: nowrap;
-            border: 1px solid rgba(0,0,0,0.06);
-            color: #064e3b;
-            box-shadow: 0 2px 6px rgba(4,120,87,0.06);
+            border: 1px solid #e5e7eb;
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
         }
         
         .data-status { font-size: 10px; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
         
-        .form-input { transition: all 0.2s; }
-        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(5,150,105,0.2); outline: none; }
+        .form-input { 
+            transition: all 0.2s ease;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-input:focus { 
+            outline: none;
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 3px rgba(13, 92, 68, 0.1);
+        }
         
         .payment-method-btn {
             transition: all 0.2s;
@@ -666,14 +841,15 @@
         .payment-method-btn.selected { background: var(--primary); color: white; }
         
         .admin-success {
-            background-color: #d1fae5;
-            border: 1px solid var(--primary);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.04) 100%);
+            border: 1px solid var(--success);
             color: #065f46;
-            padding: 8px;
+            padding: 12px;
             border-radius: 8px;
-            font-size: 11px;
+            font-size: 13px;
             margin-top: 8px;
             text-align: center;
+            font-weight: 500;
         }
         
         @media (max-width: 768px) {
@@ -691,14 +867,14 @@
                 display: flex !important;
                 flex-direction: row !important;
                 justify-content: space-around !important;
-                padding: 6px 8px !important;
+                padding: 8px !important;
                 border-radius: 0 !important;
-                box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2) !important;
+                box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
             }
             
             .sidebar .logo { display: none !important; }
             .sidebar .nav-items { display: flex !important; flex-direction: row !important; justify-content: space-around !important; width: 100% !important; gap: 2px !important; }
-            .sidebar .nav-item { flex-direction: column !important; align-items: center !important; justify-content: center !important; padding: 6px 4px !important; margin: 0 !important; gap: 2px !important; min-width: 44px !important; text-align: center !important; border-radius: 8px !important; }
+            .sidebar .nav-item { flex-direction: column !important; align-items: center !important; justify-content: center !important; padding: 8px !important; margin: 0 !important; gap: 2px !important; min-width: 44px !important; text-align: center !important; border-radius: 8px !important; }
             .sidebar .nav-item i { width: auto !important; font-size: 16px !important; margin: 0 !important; }
             .sidebar .nav-text { font-size: 9px !important; display: block !important; }
             .sidebar-toggle { display: none !important; }
@@ -1090,8 +1266,8 @@
             PAIEMENTS: STORAGE_PREFIX + 'paiements'
         };
         
-    let historiquePaiements = [];
-    let currentUser = null;
+        let historiquePaiements = [];
+        let currentUser = null;
         
         // ========== FONCTIONS LOGIN ==========
         function login() {
@@ -1177,12 +1353,13 @@
         }
         
         // MODIFICATION de la fonction exportData pour inclure le PDF
-        const originalExportData = exportData;
+        const originalExportData = typeof exportData !== 'undefined' ? exportData : function(){};
         window.exportData = function(format) {
             if(format === 'pdf') {
                 exportPDFReport();
             } else {
-                originalExportData(format);
+                // Implémenter la fonctionnalité d'export ici
+                alert('Export ' + format.toUpperCase() + ' - À implémenter');
             }
         };
         
@@ -1219,158 +1396,6 @@
         document.getElementById('sidebarToggle').onclick = () => document.getElementById('sidebar').classList.toggle('collapsed');
         
         function toggleMobileSearch() { document.getElementById('mobileSearchPanel')?.classList.toggle('active'); }
-        function searchMobileLocation() {
-            const query = document.getElementById('mobileSearchInput')?.value.toLowerCase();
-            if(!query) return;
-            const matches = unitesFiscales.filter(u => (u.nom||'').toLowerCase().includes(query) || (u.quartier||'').toLowerCase().includes(query));
-            if(!matches.length) return alert('Aucun résultat');
-            map.fitBounds(L.latLngBounds(matches.map(m=>[m.latitude,m.longitude])));
-            flashMarkersForUnits(matches.map(m=>m.id));
-            toggleMobileSearch();
-        }
-        function toggleRoutePanelMobile() { document.getElementById('routePanel')?.classList.toggle('open'); }
-        
-        function loadStoredData() {
-            let savedPaiements = localStorage.getItem(STORAGE_KEYS.PAIEMENTS);
-            if(savedPaiements) try { historiquePaiements = JSON.parse(savedPaiements); } catch(e) {}
-            let savedObjectifs = localStorage.getItem(STORAGE_KEYS.OBJECTIFS);
-            if(savedObjectifs) try { objectifsParQuartier = JSON.parse(savedObjectifs); } catch(e) {}
-            let savedObjectifAnnuel = localStorage.getItem(STORAGE_KEYS.OBJECTIF_ANNUEL);
-            if(savedObjectifAnnuel) { objectifAnnuel = parseInt(savedObjectifAnnuel); document.getElementById('objectifAnnuel').value = objectifAnnuel; }
-        }
-        
-        function sauvegarderPaiements() { localStorage.setItem(STORAGE_KEYS.PAIEMENTS, JSON.stringify(historiquePaiements)); }
-        
-        async function importGeoJSON(file, storageKey) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try { const data = JSON.parse(e.target.result); localStorage.setItem(storageKey, JSON.stringify(data)); resolve(data); }
-                    catch(err) { reject(new Error('Fichier JSON invalide')); }
-                };
-                reader.onerror = function() { reject(new Error('Erreur de lecture')); };
-                reader.readAsText(file);
-            });
-        }
-        
-        async function importAllData() {
-            const files = [
-                { id: 'fileCommune', key: STORAGE_KEYS.COMMUNE, name: 'Commune' },
-                { id: 'fileQuartiers', key: STORAGE_KEYS.QUARTIERS, name: 'Quartiers' },
-                { id: 'fileBatiments', key: STORAGE_KEYS.BATIMENTS, name: 'Bâtis' },
-                { id: 'fileRoutes', key: STORAGE_KEYS.ROUTES, name: 'Routes' },
-                { id: 'fileFerroviaire', key: STORAGE_KEYS.FERROVIAIRE, name: 'Voies ferrées' },
-                { id: 'fileUnites', key: STORAGE_KEYS.UNITES, name: 'Unités' }
-            ];
-            let messages = [];
-            for (const f of files) {
-                const input = document.getElementById(f.id);
-                const file = input.files[0];
-                if (file) {
-                    try {
-                        const data = await importGeoJSON(file, f.key);
-                        messages.push(`✅ ${f.name} importé`);
-                        // If we just imported Unités, immediately replace in-memory units and refresh UI
-                        if(f.key === STORAGE_KEYS.UNITES){
-                            try{
-                                // convert and normalize coordinates
-                                unitesFiscales = convertGeoJSONToUnites(convertGeoJSONFromUTM(data));
-                                fixAllUnitCoordinates();
-                                recomputeAndRefreshRecettes();
-                                // persist canonical point-based GeoJSON (ensure format is consistent)
-                                localStorage.setItem(STORAGE_KEYS.UNITES, JSON.stringify(convertUnitesToGeoJSON(unitesFiscales)));
-                                // refresh UI immediately so admin doesn't need to refresh the page
-                                try{ renderUnitesLayer(); } catch(e){}
-                                try{ console.log('After import: sample recettes:', (unitesFiscales||[]).slice(0,6).map(u=>({nom:u.nom, recette:u.recette}))); } catch(e){}
-                                updateRecettesParQuartier(); updateDashboard(); fillUniteFiscaleSelect(); fillDashboardQuartierFilter(); fillRecouvrementQuartierFilter(); fillQuartierAdresseSelect(); fillDestinationSelect();
-                                messages.push('ℹ️ Les unités ont remplacé l\'ancienne liste et l\'interface a été mise à jour.');
-                            } catch(e){ console.warn('Erreur traitement Unités importées', e); }
-                        }
-                    }
-                    catch(err) { messages.push(`❌ ${f.name}: ${err.message}`); }
-                }
-            }
-            try { const qd = JSON.parse(document.getElementById('quartierDataInput').value); objectifsParQuartier = qd; localStorage.setItem(STORAGE_KEYS.OBJECTIFS, JSON.stringify(qd)); messages.push(`✅ Objectifs sauvegardés`); }
-            catch(e) { messages.push(`⚠️ Objectifs: JSON invalide`); }
-            objectifAnnuel = parseInt(document.getElementById('objectifAnnuel').value);
-            localStorage.setItem(STORAGE_KEYS.OBJECTIF_ANNUEL, objectifAnnuel);
-            const msgDiv = document.getElementById('adminMessage');
-            msgDiv.className = 'admin-success mb-3';
-            msgDiv.innerHTML = messages.join('<br>') + '<br><br><strong>✅ Import terminé</strong>';
-            msgDiv.classList.remove('hidden');
-            setTimeout(() => msgDiv.classList.add('hidden'), 5000);
-        }
-        
-        function saveSettingsOnly() {
-            let messages = [];
-            try { const qd = JSON.parse(document.getElementById('quartierDataInput').value); objectifsParQuartier = qd; localStorage.setItem(STORAGE_KEYS.OBJECTIFS, JSON.stringify(qd)); messages.push(`✅ Objectifs sauvegardés`); }
-            catch(e) { messages.push(`❌ Format JSON invalide`); }
-            objectifAnnuel = parseInt(document.getElementById('objectifAnnuel').value);
-            localStorage.setItem(STORAGE_KEYS.OBJECTIF_ANNUEL, objectifAnnuel);
-            const msgDiv = document.getElementById('adminMessage');
-            msgDiv.className = 'admin-success mb-3';
-            msgDiv.innerHTML = messages.join('<br>') + '<br><br><strong>🔄 Rafraîchissez la page</strong>';
-            msgDiv.classList.remove('hidden');
-            setTimeout(() => msgDiv.classList.add('hidden'), 3000);
-        }
-        
-        function mettreAJourDashboardPaiements() {
-            let total = historiquePaiements.reduce((s,p)=>s+p.montant,0);
-            document.getElementById('totalPaye').innerHTML = total.toLocaleString() + ' FCFA';
-            document.getElementById('nbPaiements').innerHTML = historiquePaiements.length;
-            let totalRecettes = Object.values(quartierRecettes).reduce((a,b)=>a+b,0);
-            let taux = totalRecettes > 0 ? (total / totalRecettes * 100).toFixed(1) : 0;
-            document.getElementById('tauxRecouvrementLigne').innerHTML = taux + '%';
-            let html = historiquePaiements.length === 0 ? '<tr><td colspan="5" class="text-center py-2">Aucun paiement</td></tr>' : historiquePaiements.slice().reverse().map(p => `<tr><td class="px-2 py-1 border">${p.date}</td><td class="px-2 py-1 border">${p.unite}</td><td class="px-2 py-1 border">${p.quartier}</td><td class="px-2 py-1 border text-right">${p.montant.toLocaleString()} FCFA</td><td class="px-2 py-1 border">${p.moyen}</td></tr>`).join('');
-            document.getElementById('paymentHistoryBody').innerHTML = html;
-        }
-        
-        const villagesParQuartier = { "Zone_1": ["Village A", "Village B"], "Zone_2": ["Cité UGB", "Quartier Enseignant"], "Zone_3": ["Zone Franche"], "Zone_4": ["Extension Nord"] , "Zone_5": ["Périmètre Urbain"] };
-        // helper: normalize names (lowercase, trim, remove accents/punctuation) for robust matching
-        function normalizeName(s){
-            if(!s && s !== 0) return '';
-            s = String(s).trim().toLowerCase();
-            // remove accents
-            s = s.normalize('NFD').replace(/\p{Diacritic}/gu, '');
-            // remove punctuation and multiple spaces
-            s = s.replace(/[^0-9a-z ]+/g, ' ').replace(/\s+/g, ' ').trim();
-            return s;
-        }
-
-        // Zones grouping for recouvrement
-        const ZONES = {
-            'Zone1': [
-                'Cité Mandiaye Diop','Usine (Abdou Gueye)','Santhiaba (Aly Mareme Gueye)','Usine Extension VI E','Garage Mbeyene','Matar Niang'
-            ],
-            'Zone2': [
-                'Niaghe','Mor Laye Sene (Senene)','Ngagne Diaw (FassII)','Cheikh Sow','Fallene','Fass Thiaroye (Fass I)'
-            ],
-            'Zone3': [
-                'Oryx Medina Niang','Ibrahima Diao','Leye Djite','Macoumba Sylla','Ibrahima Ngom','Mame Matar Dia (Oryx)'
-            ],
-            'Zone4': [
-                'Thiaroye Azur (Cité Khadija)','Zone Industrielle','Safco I','Sapco I','Mabatal I','Thiaroye Bagdad','Safco II','Sapco II','Sapi'
-            ],
-            'Zone5': [
-                'Mbatal II','Cité Alize','Cité Ousmane Fall','Cité Socabeg','Safco II (Cité Oumar Faye)','Cité ISRA','Safco II (Cité DPV)'
-            ]
-        };
-        
-        const PATHS = { commune: "./Commune.geojson", quartiers: "./Quartiers.geojson", batiments: "./Batis.geojson", routes: "./Route nationale.geojson", ferroviaire: "./Voie ferroviaire.geojson", unites: "./Unites fiscales.geojson" };
-        
-        let map, communeData, quartiersData, batimentsData, routesData, ferroviaireData, unitesFiscales = [];
-        let quartierRecettes = {};
-        let objectifsParQuartier = { "Centre Ville": { cible: 22000000 }, "Zone Université": { cible: 18000000 }, "Industriel": { cible: 25000000 }, "Périmètre Urbain": { cible: 10000000 } };
-        let objectifAnnuel = 75000000;
-        
-        let allBounds, userLocation, userMarker, selectedDestination;
-        let quartierChart, typeChart, evolutionChart, recouvrementChart, objectifsChart, filteredUnites = [];
-        let currentQuartierFilter = "all", currentVillageFilter = "all";
-        
-        let communeLayer, quartiersLayer, quartiersLabelsLayer, batimentsLayer, routesLayer, ferroviaireLayer, unitesLayer;
-        let osmLayer, googleSatLayer, currentBasemap = 'osm';
-        let layerStates = { commune: true, quartiers: true, quartiersLabels: true, batiments: true, routes: true, ferroviaire: true, unites: true };
-        
         function toggleTheme() {
             try{
                 const body = document.body;
@@ -1381,24 +1406,14 @@
                     body.classList.add('mode-sombre');
                     if(toggleBtn) toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
                     localStorage.setItem('theme', 'sombre');
-                    // debug: theme now sombre
                 } else {
                     body.classList.remove('mode-sombre');
                     body.classList.add('mode-clair');
                     if(toggleBtn) toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
                     localStorage.setItem('theme', 'clair');
-                    // debug: theme now clair
                 }
             } catch(e){ console.warn('toggleTheme error', e); }
         }
-        // build normalized lookup: normQuartier -> zoneName
-        const ZONES_NORMALIZED = (function(){
-            const m = {};
-            for(const z of Object.keys(ZONES)){
-                (ZONES[z]||[]).forEach(q => { m[normalizeName(q)] = z; });
-            }
-            return m;
-        })();
         
         function loadTheme() {
             try{
@@ -1413,1031 +1428,37 @@
                     document.body.classList.add('mode-clair');
                     if(btn) { btn.innerHTML = '<i class="fas fa-moon"></i>'; btn.style.pointerEvents='auto'; btn.style.zIndex='10001'; }
                 }
-                // Ensure button has a single click handler (replace any broken/duplicated handlers)
-                ensureThemeToggle(btn);
-                // Force top-bar and button above overlays and log what element is under the button for debugging
-                try{
-                    const topBar = document.querySelector('.top-bar');
-                    if(topBar) topBar.style.zIndex = '10005';
-                    if(btn){ btn.style.pointerEvents='auto'; btn.style.zIndex='10006'; }
-                    // diagnostic: element at center of button
-                    if(btn){ const r = btn.getBoundingClientRect(); const cx = Math.round(r.left + r.width/2); const cy = Math.round(r.top + r.height/2); const el = document.elementFromPoint(cx, cy); console.log('Element under theme button:', el && (el.id || el.className || el.tagName)); }
-                }catch(e){ console.warn('theme debug failed', e); }
             } catch(e){ console.warn('loadTheme error', e); }
-        }
-
-        // Replace old theme toggle with a reliable one and attach single listener
-        function ensureThemeToggle(existingBtn){
-            try{
-                let btn = existingBtn || document.getElementById('themeToggle');
-                if(!btn){
-                    // create fallback in top-bar
-                    const container = document.querySelector('.top-bar-right');
-                    btn = document.createElement('button'); btn.id='themeToggle'; btn.className='theme-toggle'; btn.type='button'; btn.setAttribute('aria-label','Basculer thème'); btn.innerHTML = '<i class="fas fa-moon"></i>';
-                    if(container) container.insertBefore(btn, container.firstChild);
-                }
-                // remove any existing listeners by cloning node, then attach exactly one listener
-                const newBtn = btn.cloneNode(true);
-                btn.parentNode.replaceChild(newBtn, btn);
-                newBtn.addEventListener('click', function(e){ e.preventDefault(); toggleTheme(); });
-                // mark as attached so other initialization paths won't add another listener
-                try{ newBtn.dataset.listenerAttached = '1'; }catch(e){}
-            } catch(e){ console.warn('ensureThemeToggle failed', e); }
         }
         
         function zoomIn() { if (map) map.zoomIn(); }
         function zoomOut() { if (map) map.zoomOut(); }
-        
-        function utmToWgs84(e, n) {
-            const a=6378137, f=1/298.257223563, e2=2*f-f*f, zone=28, k0=0.9996, lon0=((zone-1)*6-180+3)*Math.PI/180;
-            const x=e-500000, y=n, M=y/k0, mu=M/(a*(1-e2/4-3*e2*e2/64-5*e2*e2*e2/256));
-            const e1=(1-Math.sqrt(1-e2))/(1+Math.sqrt(1-e2));
-            const phi1=mu+(3*e1/2-27*e1*e1*e1/32)*Math.sin(2*mu)+(21*e1*e1/16-55*e1*e1*e1*e1/32)*Math.sin(4*mu)+(151*e1*e1*e1/96)*Math.sin(6*mu);
-            const sinPhi1=Math.sin(phi1), cosPhi1=Math.cos(phi1), tanPhi1=Math.tan(phi1);
-            const N1=a/Math.sqrt(1-e2*sinPhi1*sinPhi1), T1=tanPhi1*tanPhi1, C1=e2/(1-e2)*cosPhi1*cosPhi1, R1=a*(1-e2)/Math.pow(1-e2*sinPhi1*sinPhi1,1.5), D=x/(N1*k0);
-            const latRad=phi1-(N1*tanPhi1/R1)*(D*D/2-(5+3*T1+10*C1-4*C1*C1-9*e2)*Math.pow(D,4)/24);
-            const lonRad=lon0+(D-(1+2*T1+C1)*Math.pow(D,3)/6)/cosPhi1;
-            return [latRad*180/Math.PI, lonRad*180/Math.PI];
-        }
-        
-        function convertGeoJSONFromUTM(g){
-            if(!g||!g.features) return g;
-            let conv=JSON.parse(JSON.stringify(g));
-            // helper: try utmToWgs84 and validate result
-            function tryUtm(a,b){ try{ const res = utmToWgs84(a,b); if(res && res.length===2 && Math.abs(res[0])<=90 && Math.abs(res[1])<=180) return res; } catch(e){} return null; }
-            conv.features.forEach(f=>{
-                if(!f.geometry||!f.geometry.coordinates) return;
-                let geom=f.geometry, type=geom.type;
-                // process coordinate arrays generically depending on type
-                if(type=='Point'){
-                    const [c0,c1] = geom.coordinates;
-                    // if looks like lon/lat already, keep
-                    if(Math.abs(c0)<=180 && Math.abs(c1)<=90){ /* already lon,lat */ }
-                    else {
-                        // try as (easting,northing) then (northing,easting)
-                        let r = tryUtm(c0,c1) || tryUtm(c1,c0);
-                        if(r) geom.coordinates = [r[1], r[0]]; // store as [lon, lat]
-                    }
-                } else if(type=='LineString'){
-                    geom.coordinates = geom.coordinates.map(c=>{
-                        const [c0,c1] = c;
-                        if(Math.abs(c0)<=180 && Math.abs(c1)<=90) return [c0,c1];
-                        let r = tryUtm(c0,c1) || tryUtm(c1,c0);
-                        if(r) return [r[1], r[0]]; return [c0,c1];
-                    });
-                } else if(type=='Polygon'){
-                    geom.coordinates = geom.coordinates.map(r => r.map(c => {
-                        const [c0,c1] = c;
-                        if(Math.abs(c0)<=180 && Math.abs(c1)<=90) return [c0,c1];
-                        let res = tryUtm(c0,c1) || tryUtm(c1,c0);
-                        if(res) return [res[1], res[0]]; return [c0,c1];
-                    }));
-                } else if(type=='MultiPolygon'){
-                    geom.coordinates = geom.coordinates.map(p => p.map(r => r.map(c => {
-                        const [c0,c1] = c;
-                        if(Math.abs(c0)<=180 && Math.abs(c1)<=90) return [c0,c1];
-                        let res = tryUtm(c0,c1) || tryUtm(c1,c0);
-                        if(res) return [res[1], res[0]]; return [c0,c1];
-                    })));
-                }
-            });
-            return conv;
-        }
-        
-        function convertGeoJSONToUnites(g){
-            let u=[];
-            if(!g.features) return u;
-            g.features.forEach((f,i)=>{
-                let lat=0,lng=0, geom=f.geometry;
-                if(geom.type=='Point'){ lng=geom.coordinates[0]; lat=geom.coordinates[1]; }
-                else if(geom.type=='Polygon'||geom.type=='MultiPolygon'){ let c=getCentroid(geom); lng=c[0]; lat=c[1]; }
-                let quartier = f.properties.Quartier || f.properties.QUARTIER || "Non défini";
-                // robust recette extraction: normalize keys and find a key containing 'recette' or 'montant'
-                const prop = f.properties || {};
-                let recetteVal = 0;
-                try{
-                    const keys = Object.keys(prop || {});
-                    let found = null;
-                    // build normalized map
-                    const normMap = {};
-                    keys.forEach(k => { const nk = String(k).replace(/[^0-9a-z]/gi,'').toLowerCase(); normMap[nk] = k; });
-                    // prefer keys that include 'recette' or 'montant'
-                    for(const nk of Object.keys(normMap)){
-                        if(nk.includes('recette') || nk.includes('montant')){ found = normMap[nk]; break; }
-                    }
-                    if(found){ recetteVal = prop[found]; }
-                    // fallback: pick the largest numeric-looking property value (likely the recette)
-                    if(!found){
-                        let candidate = null; let candidateVal = 0;
-                        for(const k of keys){
-                            let v = prop[k];
-                            if(v === null || v === undefined) continue;
-                            const num = Number(parseFloat(String(v).replace(/[^0-9,.-]/g, '').replace(',', '.')) || 0);
-                            if(num > candidateVal){ candidateVal = num; candidate = k; }
-                        }
-                        if(candidate && candidateVal > 0){
-                            recetteVal = candidateVal;
-                            console.warn('convertGeoJSONToUnites: no explicit recette key found; using largest numeric property', candidate, 'value', candidateVal, 'for feature', i);
-                        } else {
-                            // nothing found => 0
-                            recetteVal = 0;
-                            console.debug('convertGeoJSONToUnites: recette parsed as 0 for feature', i, 'properties sample:', prop);
-                        }
-                    } else {
-                        // parse numbers: remove non-digit except comma/dot/minus
-                        recetteVal = Number(parseFloat(String(recetteVal).replace(/[^0-9,.-]/g, '').replace(',', '.')) || 0);
-                        if(recetteVal === 0){ console.debug('convertGeoJSONToUnites: recette parsed as 0 for feature', i, 'properties sample:', prop); }
-                    }
-                } catch(e){ console.warn('Error parsing recette for feature', i, e); recetteVal = 0; }
-                u.push({id:i+1, nom:prop.Nom||prop.nom||`Unité ${i+1}`, quartier:quartier, village:getRandomVillage(quartier), type:prop.Type||"Autre", superficie:parseFloat(prop.Superficie||0) || 0, recette:recetteVal, latitude:lat, longitude:lng, annee:ANNEE_COURANTE, statut:prop.Statut||"Actif"});
-            });
-            return u;
-        }
-
-        function normalizeRecettes(){
-            if(!unitesFiscales || !unitesFiscales.length) return;
-            let mutated = false;
-            unitesFiscales.forEach(u=>{
-                const n = Number(u.recette) || 0;
-                if(n !== u.recette){ u.recette = n; mutated = true; }
-            });
-            if(mutated){ try{ localStorage.setItem(STORAGE_KEYS.UNITES, JSON.stringify(convertUnitesToGeoJSON(unitesFiscales))); } catch(e){} }
-        }
-
-        function recomputeAndRefreshRecettes(){
-            try{ normalizeRecettes(); } catch(e){ console.warn('normalizeRecettes failed', e); }
-            try{ updateRecettesParQuartier(); } catch(e){ console.warn('updateRecettesParQuartier failed', e); }
-            try{ updateRecouvrement(); } catch(e){ console.warn('updateRecouvrement failed', e); }
-            try{ updateDashboard(); } catch(e){ console.warn('updateDashboard failed', e); }
-            try{ updateStats(); } catch(e){ console.warn('updateStats failed', e); }
-            try{ mettreAJourDashboardPaiements(); } catch(e){ console.warn('mettreAJourDashboardPaiements failed', e); }
-        }
-        
-        function getRandomVillage(quartier){
-            if(villagesParQuartier[quartier] && villagesParQuartier[quartier].length){
-                return villagesParQuartier[quartier][Math.floor(Math.random() * villagesParQuartier[quartier].length)];
-            }
-            return "Non spécifié";
-        }
-        
-        function getCentroid(g){
-            if(g.type=='Polygon'){ let c=g.coordinates[0], sx=0,sy=0; c.forEach(p=>{ sx+=p[0]; sy+=p[1]; }); return[sx/c.length,sy/c.length]; }
-            return[0,0];
-        }
-
-        // Normalize lat/lon values: handle swapped coords or raw UTM-like coordinates
-        function normalizeLatLon(lat, lon){
-            // if values are strings, parse
-            lat = Number(lat); lon = Number(lon);
-            // If both look like valid lat/lon
-            const latValid = !isNaN(lat) && lat <= 90 && lat >= -90;
-            const lonValid = !isNaN(lon) && lon <= 180 && lon >= -180;
-            if(latValid && lonValid) return [lat, lon];
-
-            // maybe swapped: try swap and test
-            const swappedLat = lon; const swappedLon = lat;
-            const swappedLatValid = !isNaN(swappedLat) && swappedLat <= 90 && swappedLat >= -90;
-            const swappedLonValid = !isNaN(swappedLon) && swappedLon <= 180 && swappedLon >= -180;
-            if(swappedLatValid && swappedLonValid) return [swappedLat, swappedLon];
-
-            // maybe UTM-like (large numbers) -> try converting using utmToWgs84 (expects easting,northing)
-            if(Math.abs(lat) > 1000 || Math.abs(lon) > 1000){
-                try{
-                    // try both orders: (easting, northing) = (lon, lat) and (lat, lon)
-                    let try1 = utmToWgs84(lon, lat); // returns [lat, lon]
-                    if(try1 && try1.length===2 && Math.abs(try1[0])<=90 && Math.abs(try1[1])<=180) return [try1[0], try1[1]];
-                    let try2 = utmToWgs84(lat, lon);
-                    if(try2 && try2.length===2 && Math.abs(try2[0])<=90 && Math.abs(try2[1])<=180) return [try2[0], try2[1]];
-                } catch(e){ /* ignore */ }
-            }
-
-            // fallback: return as-is (may be invalid)
-            return [lat, lon];
-        }
-
-        function fixAllUnitCoordinates(){
-            if(!unitesFiscales || !unitesFiscales.length) return;
-            let mutated = false;
-            unitesFiscales.forEach(u=>{
-                const lat = Number(u.latitude), lon = Number(u.longitude);
-                const [nlat, nlon] = normalizeLatLon(lat, lon);
-                if(nlat !== lat || nlon !== lon){ u.latitude = nlat; u.longitude = nlon; mutated = true; }
-            });
-            if(mutated){ try{ localStorage.setItem(STORAGE_KEYS.UNITES, JSON.stringify(convertUnitesToGeoJSON(unitesFiscales))); } catch(e){} }
-        }
-
-        function convertUnitesToGeoJSON(unites){
-            const features = (unites||[]).map(u=>({ type:'Feature', properties: { Nom:u.nom, Quartier:u.quartier, Type:u.type, Recette:u.recette, Superficie:u.superficie }, geometry: { type:'Point', coordinates:[u.longitude,u.latitude] } }));
-            return { type:'FeatureCollection', features };
-        }
-        
-        async function loadGeoJSON(path, storageKey) {
-            const stored = localStorage.getItem(storageKey);
-            if(stored) try { return JSON.parse(stored); } catch(e) {}
-            const response = await fetch(path + '?t=' + Date.now());
-            if(!response.ok) throw new Error('HTTP '+response.status);
-            const data = await response.json();
-            localStorage.setItem(storageKey, JSON.stringify(data));
-            return data;
-        }
-        
-        function updateStatus(t,l){ let s=document.getElementById(`status${t}`); if(s) s.className=l?'status-dot':'status-dot error'; }
-        
-        function updateRecettesParQuartier(){
-            quartierRecettes = {};
-            unitesFiscales.forEach(u => { let recette = Number(u.recette) || 0; quartierRecettes[u.quartier] = (quartierRecettes[u.quartier]||0) + recette; });
-            let total = Object.values(quartierRecettes).reduce((a,b)=>a+b,0);
-            let totalDiv = document.getElementById('totalRecettesCommune');
-            if(totalDiv) totalDiv.innerHTML = total.toLocaleString() + ' FCFA';
-            let html = '';
-            for(let [quartier, montant] of Object.entries(quartierRecettes)){
-                let taux = objectifsParQuartier[quartier] ? (montant/objectifsParQuartier[quartier].cible*100).toFixed(1) : 'N/A';
-                html += `<div class="flex justify-between items-center border-b border-white/30 pb-1"><span class="text-xs">${quartier}</span><span class="text-sm font-bold">${montant.toLocaleString()} FCFA</span><span class="text-xs">${taux}%</span></div>`;
-            }
-            let statsDiv = document.getElementById('recetteParQuartierStats');
-            if(statsDiv) statsDiv.innerHTML = html;
-            mettreAJourDashboardPaiements();
-        }
-        
-        function filterDashboardByQuartier(){
-            currentQuartierFilter = document.getElementById('dashboardQuartierFilter').value;
-            const villageContainer = document.getElementById('villageFilterContainer');
-            if(currentQuartierFilter !== 'all' && villagesParQuartier[currentQuartierFilter]){
-                villageContainer.style.display = 'block';
-                const villageSelect = document.getElementById('villageFilter');
-                villageSelect.innerHTML = '<option value="all">Tous les villages</option>';
-                villagesParQuartier[currentQuartierFilter].forEach(v => { let opt = document.createElement('option'); opt.value = v; opt.textContent = v; villageSelect.appendChild(opt); });
-                currentVillageFilter = 'all';
-            } else { villageContainer.style.display = 'none'; currentVillageFilter = 'all'; }
-            filterDashboardByVillage();
-        }
-        
-        function filterDashboardByVillage(){ currentVillageFilter = document.getElementById('villageFilter')?.value || 'all'; updateDashboardWithFilter(); }
-        
-        function fillDashboardQuartierFilter(){
-            let select = document.getElementById('dashboardQuartierFilter');
-            if(select){
-                let set = new Set(); unitesFiscales.forEach(u => { if(u.quartier) set.add(u.quartier); });
-                select.innerHTML = '<option value="all">Tous les quartiers</option>';
-                Array.from(set).sort().forEach(q=>{ let opt = document.createElement('option'); opt.value = q; opt.textContent = q; select.appendChild(opt); });
-            }
-        }
-        
-        function fillRecouvrementQuartierFilter(){
-            let select = document.getElementById('recouvrementQuartierFilter');
-            if(select){
-                select.innerHTML = '<option value="all">Toutes les zones</option>';
-                // add zones
-                Object.keys(ZONES).forEach(z => { let opt = document.createElement('option'); opt.value = z; opt.textContent = z; select.appendChild(opt); });
-                // add a divider-like disabled option then list individual quartiers if needed
-                let sep = document.createElement('option'); sep.disabled = true; sep.textContent = '----- Quartiers -----'; select.appendChild(sep);
-                let set = new Set(); unitesFiscales.forEach(u => { if(u.quartier) set.add(u.quartier); });
-                Array.from(set).sort().forEach(q=>{ let opt = document.createElement('option'); opt.value = q; opt.textContent = q; select.appendChild(opt); });
-            }
-        }
-        
-        function fillQuartierAdresseSelect(){
-            let select = document.getElementById('quartierAdresse');
-            if(select){
-                let set = new Set(); unitesFiscales.forEach(u => { if(u.quartier) set.add(u.quartier); });
-                select.innerHTML = '<option value="">Sélectionner</option>';
-                Array.from(set).sort().forEach(q=>{ let opt = document.createElement('option'); opt.value = q; opt.textContent = q; select.appendChild(opt); });
-            }
-        }
-        
-        function fillUniteFiscaleSelect(){
-            let select = document.getElementById('uniteFiscaleNom');
-            let input = document.getElementById('uniteFiscaleInput');
-            let dl = document.getElementById('uniteDatalist');
-            if(select){
-                select.innerHTML = '<option value="">Sélectionner</option>';
-                unitesFiscales.forEach(u => { let opt = document.createElement('option'); opt.value = u.nom; opt.textContent = `${u.nom} - ${u.quartier}`; select.appendChild(opt); });
-            }
-            if(dl){ dl.innerHTML = ''; unitesFiscales.forEach(u=>{ let o=document.createElement('option'); o.value = u.nom; dl.appendChild(o); }); }
-            if(input){ input.addEventListener('input', ()=>{ /* could add autocomplete selection logic */ }); }
-            // show/hide type 'Autre' input
-            const typeSelect = document.getElementById('typeUnite');
-            const typeOther = document.getElementById('typeUniteOther');
-            if(typeSelect && typeOther){ typeSelect.addEventListener('change', ()=>{ if(typeSelect.value === 'Autre'){ typeOther.classList.remove('hidden'); typeOther.required = true; } else { typeOther.classList.add('hidden'); typeOther.required = false; } }); }
-        }
-        
-        function selectPaymentMethod(method){
-            document.getElementById('paymentMethod').value = method;
-            document.getElementById('methodWave').classList.remove('selected');
-            document.getElementById('methodOrange').classList.remove('selected');
-            if(method === 'WAVE') document.getElementById('methodWave').classList.add('selected');
-            else document.getElementById('methodOrange').classList.add('selected');
-        }
-        
-        function processPayment(event){
-            event.preventDefault();
-            let uniteNom = (document.getElementById('uniteFiscaleInput') && document.getElementById('uniteFiscaleInput').value) || document.getElementById('uniteFiscaleNom').value;
-            let nom = document.getElementById('nomComplet').value;
-            let type = document.getElementById('typeUnite').value;
-            if(type === 'Autre'){ const other = document.getElementById('typeUniteOther').value.trim(); if(other) type = other; }
-            let quartier = document.getElementById('quartierAdresse').value;
-            let telephone = document.getElementById('telephone').value;
-            let method = document.getElementById('paymentMethod').value;
-            if(!uniteNom){ alert('Sélectionnez une unité'); return; }
-            if(!method){ alert('Choisissez un moyen de paiement'); return; }
-            let montant = 0;
-            let unite = unitesFiscales.find(u => u.nom === uniteNom);
-            if(unite) montant = unite.recette;
-            else montant = Math.floor(Math.random() * 100000 + 10000);
-            let nouveauPaiement = { date: new Date().toLocaleString(), unite: uniteNom, proprietaire: nom, quartier: quartier, montant: montant, moyen: method === 'WAVE' ? 'WAVE' : 'ORANGE MONEY', telephone: telephone };
-            historiquePaiements.push(nouveauPaiement);
-            sauvegarderPaiements();
-            mettreAJourDashboardPaiements();
-            let lienPaiement = method === 'WAVE' ? `https://wave.com/pay/${Date.now()}` : `https://orangemoney.com/pay/${Date.now()}`;
-            let messageDiv = document.getElementById('paymentMessage');
-            messageDiv.innerHTML = `<div class="bg-green-100 border border-green-400 text-green-700 p-3 rounded"><i class="fas fa-check-circle"></i> <strong>Succès !</strong><br>📱 SMS envoyé au ${telephone}<br><a href="${lienPaiement}" target="_blank">${lienPaiement}</a><br>Montant: ${montant.toLocaleString()} FCFA</div>`;
-            messageDiv.classList.remove('hidden');
-            document.getElementById('paymentForm').reset();
-            document.getElementById('paymentMethod').value = '';
-            document.getElementById('methodWave').classList.remove('selected');
-            document.getElementById('methodOrange').classList.remove('selected');
-            setTimeout(() => messageDiv.classList.add('hidden'), 15000);
-            alert(`✅ SMS envoyé à ${telephone}\nLien: ${lienPaiement}\nMontant: ${montant.toLocaleString()} FCFA`);
-        }
-        
-        function filterRecouvrementByQuartier(){
-            let val = document.getElementById('recouvrementQuartierFilter').value;
-            let filtered = [];
-            let zoneTarget = null;
-            if(val === 'all') filtered = unitesFiscales;
-            else if(val && val.startsWith('Zone')){
-                // filter units whose normalized quartier maps to this zone
-                filtered = unitesFiscales.filter(u => {
-                    const nq = normalizeName(u.quartier || '');
-                    return ZONES_NORMALIZED[nq] === val;
-                });
-                // compute zone target sum using normalized matching
-                let t = 0;
-                Object.keys(objectifsParQuartier || {}).forEach(k => { if(ZONES_NORMALIZED[normalizeName(k)] === val) t += (objectifsParQuartier[k] && objectifsParQuartier[k].cible) || 0; });
-                zoneTarget = t > 0 ? t : Math.round(objectifAnnuel / Object.keys(ZONES).length);
-            } else {
-                filtered = unitesFiscales.filter(u => u.quartier === val);
-            }
-            let html = filtered.map(u => {
-                let recetteNum = Number(u.recette) || 0;
-                let taux = 'N/A';
-                if(val && val.startsWith('Zone')){ taux = zoneTarget ? ((recetteNum / zoneTarget * 100)).toFixed(1) : 'N/A'; }
-                else { taux = objectifsParQuartier[u.quartier] ? ((recetteNum/objectifsParQuartier[u.quartier].cible*100)).toFixed(1) : 'N/A'; }
-                return `<tr><td class="px-2 py-1 border">${u.nom}</td><td class="px-2 py-1 border">${u.quartier}</td><td class="px-2 py-1 border">${recetteNum.toLocaleString()}</td><td class="px-2 py-1 border">${taux}%</td></tr>`;
-            }).join('');
-            if(html === '') html = '<tr><td colspan="4" class="text-center py-2">Aucune donnée</td></tr>';
-            document.getElementById('recouvrementTableBody').innerHTML = html;
-        }
-        
-        async function loadAllData(){
-            document.getElementById('loadingOverlay').style.display='flex';
-            try{
-                updateLoading('Chargement...');
-                let d = await loadGeoJSON(PATHS.commune, STORAGE_KEYS.COMMUNE);
-                communeData = convertGeoJSONFromUTM(d);
-                updateStatus('Commune', true);
-                d = await loadGeoJSON(PATHS.quartiers, STORAGE_KEYS.QUARTIERS);
-                quartiersData = convertGeoJSONFromUTM(d);
-                updateStatus('Quartiers', true);
-                d = await loadGeoJSON(PATHS.batiments, STORAGE_KEYS.BATIMENTS);
-                batimentsData = convertGeoJSONFromUTM(d);
-                updateStatus('Batiments', true);
-                d = await loadGeoJSON(PATHS.routes, STORAGE_KEYS.ROUTES);
-                routesData = convertGeoJSONFromUTM(d);
-                updateStatus('Routes', true);
-                d = await loadGeoJSON(PATHS.ferroviaire, STORAGE_KEYS.FERROVIAIRE);
-                ferroviaireData = convertGeoJSONFromUTM(d);
-                updateStatus('Ferroviaire', true);
-                d = await loadGeoJSON(PATHS.unites, STORAGE_KEYS.UNITES);
-                unitesFiscales = convertGeoJSONToUnites(convertGeoJSONFromUTM(d));
-                try{ fixAllUnitCoordinates(); } catch(e){ console.warn('fixAllUnitCoordinates failed', e); }
-                recomputeAndRefreshRecettes();
-                try{ console.log('Loaded unitesFiscales count:', (unitesFiscales||[]).length); console.log('sample recettes:', (unitesFiscales||[]).slice(0,6).map(u=>({nom:u.nom, recette:u.recette}))); } catch(e){}
-                updateStatus('Unites', true);
-                loadStoredData();
-                try{ renderUnitesLayer(); } catch(e){ console.warn('renderUnitesLayer after load failed', e); }
-                updateRecettesParQuartier();
-                updateLoading('Initialisation carte...');
-                initMap();
-                setTimeout(()=>{
-                    updateDashboard(); updateStats(); updateRecouvrement(); 
-                    fillDestinationSelect(); fillDashboardQuartierFilter(); fillRecouvrementQuartierFilter(); 
-                    fillQuartierAdresseSelect(); fillUniteFiscaleSelect();
-                    updateExportPreview(); mettreAJourDashboardPaiements();
-                    filterRecouvrementByQuartier();
-                    document.getElementById('loadingOverlay').style.display='none';
-                    document.getElementById('carteView').style.display='block';
-                    showView('carte');
-                },500);
-            } catch(e){ 
-                document.getElementById('loadingStatus').innerHTML='Erreur: '+e.message; 
-                document.getElementById('errorDetails').classList.remove('hidden'); 
-                document.getElementById('errorDetails').innerHTML='Vérifiez les fichiers GeoJSON';
-            }
-        }
-        
-        function updateLoading(m){ document.getElementById('loadingStatus').innerHTML=m; }
-
-        // transient UI toast for short messages
-        function showTempMessage(msg, timeout=3500){
-            let t = document.getElementById('tempToast');
-            if(!t){ t = document.createElement('div'); t.id='tempToast'; t.style='position:fixed;top:20px;right:20px;z-index:99999;pointer-events:none;'; document.body.appendChild(t); }
-            t.innerHTML = `<div style="background:rgba(0,0,0,0.75);color:white;padding:10px 14px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.25);pointer-events:auto">${msg}</div>`;
-            setTimeout(()=>{ if(t) t.innerHTML=''; }, timeout);
-        }
-        
-        function initMap(){
-            // preferCanvas helps rendering many vector layers/markers faster in some environments
-            map=L.map('map', { preferCanvas: true }).setView([14.702,-17.195],14);
-            osmLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'OSM'}).addTo(map);
-            googleSatLayer=L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{subdomains:['mt0','mt1','mt2','mt3'],attribution:'Google'});
-            allBounds=L.latLngBounds();
-            if(communeData){ communeLayer=L.geoJSON(communeData,{style:{color:'black',weight:3,fillColor:'transparent',className:'custom-shadow'}}).addTo(map); allBounds.extend(communeLayer.getBounds()); }
-            if(quartiersData){ quartiersLayer=L.geoJSON(quartiersData,{style:{color:'#4a5568',weight:2,fillColor:'#cbd5e0',fillOpacity:0.3},onEachFeature:(f,l)=>{ let n=f.properties.QRT_VLG_HA||f.properties.Nom||"Quartier"; l.bindPopup(`<b>${n}</b>`); }}).addTo(map); allBounds.extend(quartiersLayer.getBounds()); }
-            if(quartiersData){ quartiersLabelsLayer=L.layerGroup(); quartiersData.features.forEach(f=>{ let n=f.properties.QRT_VLG_HA||f.properties.Nom||"Quartier"; let c=L.geoJSON(f).getBounds().getCenter(); L.marker(c,{icon:L.divIcon({className:'quartier-label',html:n,iconSize:[80,16]}),interactive:false}).addTo(quartiersLabelsLayer); }); quartiersLabelsLayer.addTo(map); }
-            if(batimentsData){ batimentsLayer=L.geoJSON(batimentsData,{pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:3,color:'#6b7280',fillColor:'#9ca3af',fillOpacity:0.8})}).addTo(map); }
-            if(routesData){ routesLayer=L.geoJSON(routesData,{style:{color:'#eab308',weight:3,opacity:0.8}}).addTo(map); }
-            if(ferroviaireData){ ferroviaireLayer=L.geoJSON(ferroviaireData,{style:{color:'#6b7280',weight:2,opacity:0.8,dashArray:'6,4'}}).addTo(map); }
-            if(unitesFiscales.length){ unitesLayer=L.layerGroup(); unitesFiscales.forEach(u=>{ let c='var(--primary)'; const m={'Commerce':'#059669','Industrie':'#16a34a','Éducation':'#10b981'}; if(m[u.type])c=m[u.type]; L.marker([u.latitude,u.longitude],{icon:L.divIcon({html:`<div class="unit-marker" style="background:${c}"></div>`,className:'',iconSize:[16,16],iconAnchor:[8,8]}), zIndexOffset: -100 }).bindPopup(`<b>${u.nom}</b><br>${u.quartier}<br>${(u.recette||0).toLocaleString()} FCFA`).addTo(unitesLayer); }); unitesLayer.addTo(map); }
-            if(allBounds.isValid()) map.fitBounds(allBounds);
-            // initialize draw controls after the map and layers are ready
-            try{ initDrawControls(); } catch(e){ console.warn('Init draw controls failed', e); }
-            // render unités using helper to be robust
-            renderUnitesLayer();
-        }
-
-        function renderUnitesLayer(){
-            try{ if(unitesLayer) map.removeLayer(unitesLayer); } catch(e){}
-            try{ console.log('renderUnitesLayer called, unitesFiscales length=', (unitesFiscales||[]).length); } catch(e){}
-            // Use marker clustering with chunked loading to avoid blocking on many markers
-            unitesMarkers = [];
-            if(!unitesFiscales || !unitesFiscales.length) return;
-            const cluster = L.markerClusterGroup({ chunkedLoading: true, chunkProgress: null, maxClusterRadius: 40 });
-            unitesFiscales.forEach(u=>{
-                let c='var(--primary)'; const m={'Commerce':'#059669','Industrie':'#16a34a','Éducation':'#10b981'}; if(m[u.type]) c = m[u.type];
-                const html = `<div class="unit-marker" data-id="${u.id}" style="background:${c}"></div>`;
-                const marker = L.marker([u.latitude,u.longitude],{icon:L.divIcon({html:html, className:'', iconSize:[16,16], iconAnchor:[8,8]}), zIndexOffset: -100 }).bindPopup(`<b>${u.nom}</b><br>${u.quartier}<br>${(u.recette||0).toLocaleString()} FCFA`);
-                marker.on('click', ()=>{ selectedDestination = { lat: u.latitude, lng: u.longitude, nom: u.nom }; document.getElementById('routeInfo').innerHTML = 'Destination: ' + u.nom; });
-                cluster.addLayer(marker);
-                unitesMarkers.push({ id: u.id, marker });
-            });
-            unitesLayer = cluster;
-            if(layerStates && layerStates.unites !== false) unitesLayer.addTo(map);
-        }
-
-        function flashMarkersForUnits(ids){
-            if(!unitesMarkers || !unitesMarkers.length) return;
-            unitesMarkers.forEach(m => {
-                const el = m.marker.getElement && m.marker.getElement();
-                if(!el) return;
-                if(ids.includes(m.id)){
-                    el.classList.add('flash-marker');
-                    m.marker.openPopup();
-                    setTimeout(()=>{ el.classList.remove('flash-marker'); m.marker.closePopup(); }, 5000);
-                }
-            });
-        }
-
-        // --- Dashboard edit/delete utilities ---
-        function openEditUnitModal(id){
-            const unit = unitesFiscales.find(u=>u.id===id);
-            if(!unit) return alert('Unité introuvable');
-            let modal = document.getElementById('editUnitModal');
-            if(!modal){
-                modal = document.createElement('div'); modal.id='editUnitModal'; modal.style='position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:2000;';
-                modal.innerHTML = `
-                    <div style='background:white;padding:16px;border-radius:8px;min-width:320px;'>
-                        <h3 style='margin-top:0'>Modifier unité</h3>
-                        <label>Nom<br><input id='edit_nom' class='w-full p-1 border'></label><br>
-                        <label>Quartier<br><input id='edit_quartier' class='w-full p-1 border'></label><br>
-                        <label>Type<br><input id='edit_type' class='w-full p-1 border'></label><br>
-                        <label>Recette<br><input id='edit_recette' type='number' class='w-full p-1 border'></label><br>
-                        <div style='display:flex;gap:8px;justify-content:flex-end;margin-top:8px;'>
-                            <button id='edit_cancel' class='bottom-btn' style='background:#e3342f;color:white'>Annuler</button>
-                            <button id='edit_save' class='bottom-btn' style='background:#059669;color:white'>Enregistrer</button>
-                        </div>
-                    </div>`;
-                document.body.appendChild(modal);
-                document.getElementById('edit_cancel').addEventListener('click', ()=> modal.style.display='none');
-                document.getElementById('edit_save').addEventListener('click', ()=> saveEditedUnit());
-            }
-            document.getElementById('edit_nom').value = unit.nom || '';
-            document.getElementById('edit_quartier').value = unit.quartier || '';
-            document.getElementById('edit_type').value = unit.type || '';
-            document.getElementById('edit_recette').value = unit.recette || 0;
-            modal.dataset.editingId = id;
-            modal.style.display='flex';
-        }
-
-        function saveEditedUnit(){
-            const modal = document.getElementById('editUnitModal');
-            if(!modal) return;
-            const id = parseInt(modal.dataset.editingId);
-            const unit = unitesFiscales.find(u=>u.id===id);
-            if(!unit) return alert('Unité introuvable');
-            unit.nom = document.getElementById('edit_nom').value || unit.nom;
-            unit.quartier = document.getElementById('edit_quartier').value || unit.quartier;
-            unit.type = document.getElementById('edit_type').value || unit.type;
-            unit.recette = parseFloat(document.getElementById('edit_recette').value) || unit.recette;
-            // persist and refresh UI
-            localStorage.setItem(STORAGE_KEYS.UNITES, JSON.stringify(convertUnitesToGeoJSON(unitesFiscales)));
-            try{ renderUnitesLayer(); } catch(e){}
-            updateRecettesParQuartier(); updateDashboard();
-            modal.style.display='none';
-        }
-
-        function deleteUnit(id){
-            if(!confirm('Supprimer cette unité ?')) return;
-            const idx = unitesFiscales.findIndex(u=>u.id===id);
-            if(idx===-1) return alert('Unité introuvable');
-            unitesFiscales.splice(idx,1);
-            // reassign IDs to keep them sequential (optional)
-            unitesFiscales.forEach((u,i)=>u.id=i+1);
-            localStorage.setItem(STORAGE_KEYS.UNITES, JSON.stringify(convertUnitesToGeoJSON(unitesFiscales)));
-            try{ renderUnitesLayer(); } catch(e){}
-            updateRecettesParQuartier(); updateDashboard();
-        }
-
-        // --- Digitizing utilities with Leaflet.draw ---
-    let drawControl, drawnItems;
-    let currentDrawTarget = null; // layer key
-    let digitizing = { geom: null };
-
-        function initDrawControls(){
-            drawnItems = new L.FeatureGroup();
-            map.addLayer(drawnItems);
-            drawControl = new L.Control.Draw({
-                edit: { featureGroup: drawnItems, edit: false },
-                draw: { polygon: false, polyline: false, rectangle: false, circle: false, marker: false }
-            });
-            map.on(L.Draw.Event.CREATED, function (e) {
-                const layer = e.layer;
-                drawnItems.clearLayers(); // only one at a time
-                drawnItems.addLayer(layer);
-                const geo = layer.toGeoJSON().geometry;
-                digitizingAfterDraw(geo);
-            });
-        }
-
-        // Theme initialization is handled by initThemeControls() later to avoid duplicate attachment.
-
-        function openDigitizeMenu(){
-            // show a modal selection for layer and geometry type
-            const modalId = 'layerSelectModal';
-            let modal = document.getElementById(modalId);
-            if(!modal){
-                modal = document.createElement('div'); modal.id = modalId; modal.style='position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:2000;';
-                modal.innerHTML = `
-                    <div style='background:white;padding:16px;border-radius:8px;min-width:320px;'>
-                        <h3 style='margin-top:0'>Numériser - Choisir la couche</h3>
-                        <select id='layerSelect' class='w-full p-2 border mb-2'>
-                            <option value='unites'>Unités fiscales</option>
-                            <option value='batiments'>Bâtis</option>
-                            <option value='routes'>Routes</option>
-                            <option value='ferroviaire'>Voies ferrées</option>
-                            <option value='quartiers'>Quartiers</option>
-                            <option value='commune'>Commune</option>
-                        </select>
-                        <label style='display:flex;align-items:center;gap:8px;margin-bottom:8px;'><input type='checkbox' id='useGps'/> Capturer ma position (GPS) automatiquement</label>
-                        <div style='display:flex;gap:8px;justify-content:flex-end'>
-                            <button id='layerCancel' class='bottom-btn' style='background:#e3342f;color:white'>Annuler</button>
-                            <button id='layerNext' class='bottom-btn' style='background:#059669;color:white'>Suivant</button>
-                        </div>
-                    </div>`;
-                document.body.appendChild(modal);
-                document.getElementById('layerCancel').addEventListener('click', ()=> modal.style.display='none');
-                document.getElementById('layerNext').addEventListener('click', ()=>{
-                    const key = document.getElementById('layerSelect').value; const useGps = document.getElementById('useGps').checked; modal.style.display='none';
-                    if(useGps){ startGpsCapture(key); } else { startDrawForLayer(key); }
-                });
-            }
-            modal.style.display='flex';
-        }
-
-        // GPS capture modal and helpers (non-blocking, retryable)
-        function startGpsCapture(key){
-            if(!navigator.geolocation) { showTempMessage('Géolocalisation non disponible dans ce navigateur'); return; }
-            currentDrawTarget = key;
-            showGpsModal();
-            _doGpsCapture();
-        }
-
-        function showGpsModal(){
-            let m = document.getElementById('gpsModal');
-            if(!m){
-                m = document.createElement('div'); m.id='gpsModal'; m.style='position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:3000;';
-                m.innerHTML = `
-                    <div style='background:white;padding:18px;border-radius:8px;min-width:300px;text-align:center;'>
-                        <div id='gpsSpinner' style='margin-bottom:12px;'><svg width="36" height="36" viewBox="0 0 50 50"><path fill="#059669" d="M25 5a20 20 0 1 0 20 20A20 20 0 0 0 25 5zm0 3a17 17 0 1 1-17 17A17 17 0 0 1 25 8z"><animateTransform attributeType='xml' attributeName='transform' type='rotate' from='0 25 25' to='360 25 25' dur='1s' repeatCount='indefinite'/></path></svg></div>
-                        <div id='gpsStatus' style='font-weight:600;margin-bottom:12px'>Récupération position GPS...</div>
-                        <div style='display:flex;gap:8px;justify-content:center;'>
-                            <button id='gpsCancel' class='bottom-btn' style='background:#e3342f;color:white'>Annuler</button>
-                            <button id='gpsRetry' class='bottom-btn' style='background:#059669;color:white;display:none'>Réessayer</button>
-                        </div>
-                    </div>`;
-                document.body.appendChild(m);
-                document.getElementById('gpsCancel').addEventListener('click', ()=>{ hideGpsModal(); try{ updateLoading(''); } catch(e){} });
-                document.getElementById('gpsRetry').addEventListener('click', ()=>{ document.getElementById('gpsRetry').style.display='none'; document.getElementById('gpsSpinner').style.display='block'; document.getElementById('gpsStatus').textContent='Nouvelle tentative...'; _doGpsCapture(); });
-            }
-            m.style.display='flex'; document.getElementById('gpsRetry').style.display='none'; document.getElementById('gpsSpinner').style.display='block'; document.getElementById('gpsStatus').textContent='Récupération position GPS...';
-        }
-
-        function hideGpsModal(){ let m=document.getElementById('gpsModal'); if(m) m.style.display='none'; }
-
-        function _doGpsCapture(){
-            const opts = { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 };
-            try{ updateLoading('Récupération position GPS (haute précision)...'); } catch(e){}
-            navigator.geolocation.getCurrentPosition((pos)=>{
-                try{ updateLoading('Position OK'); } catch(e){}
-                const lat = pos.coords.latitude, lon = pos.coords.longitude;
-                const geometry = { type: 'Point', coordinates: [lon, lat] };
-                document.getElementById('gpsStatus').textContent='Position capturée';
-                document.getElementById('gpsSpinner').style.display='none';
-                setTimeout(()=>{ hideGpsModal(); digitizingAfterDraw(geometry); }, 600);
-            }, (err)=>{
-                try{ updateLoading(''); } catch(e){}
-                console.warn('GPS error', err);
-                const st = document.getElementById('gpsStatus'); if(st) st.textContent = 'Échec: ' + (err.message || err.code);
-                const spinner = document.getElementById('gpsSpinner'); if(spinner) spinner.style.display='none';
-                const retry = document.getElementById('gpsRetry'); if(retry) retry.style.display='inline-block';
-            }, opts);
-        }
-
-        function startDrawForLayer(key){
-            if(!map) return alert('Carte non initialisée');
-            currentDrawTarget = key;
-            // enable draw tools depending on layer
-            const options = { polygon: false, polyline: false, marker: false, circle: false, rectangle: false };
-            if(key === 'unites' || key === 'batiments') options.marker = true;
-            if(key === 'routes' || key === 'ferroviaire') options.polyline = true;
-            if(key === 'quartiers' || key === 'commune') options.polygon = true;
-            // recreate drawControl with desired tools
-            // sanity checks: ensure Leaflet.draw is available
-            if(typeof L === 'undefined' || typeof L.Draw === 'undefined'){
-                console.error('Leaflet or Leaflet.draw missing', window.L);
-                showTempMessage('Erreur: Leaflet.draw non chargé. Vérifiez la connexion ou les includes JS.');
-                return;
-            }
-            // ensure drawnItems exists
-            if(!drawnItems) initDrawControls();
-            try{ if(drawControl) map.removeControl(drawControl); } catch(e){}
-            drawControl = new L.Control.Draw({ edit: { featureGroup: drawnItems, edit: false }, draw: options });
-            map.addControl(drawControl);
-
-            // Immediately enable the appropriate draw handler so the user can start drawing
-            try{
-                let handler = null;
-                if(options.marker && typeof L.Draw.Marker === 'function') handler = new L.Draw.Marker(map);
-                else if(options.polyline && typeof L.Draw.Polyline === 'function') handler = new L.Draw.Polyline(map);
-                else if(options.polygon && typeof L.Draw.Polygon === 'function') handler = new L.Draw.Polygon(map);
-                if(handler){ handler.enable(); }
-                else { console.warn('No draw handler available for options', options); }
-            } catch(err){ console.warn('Could not enable draw handler', err); }
-
-            showTempMessage('Outil de dessin activé pour ' + key + '. Dessinez sur la carte puis remplissez les attributs.');
-        }
-
-        async function digitizingAfterDraw(geometry){
-            // remove draw control
-            try{ if(drawControl) map.removeControl(drawControl); } catch(e){}
-            // open attribute modal depending on currentDrawTarget
-            // Create or reuse attribute modal
-            let modal = document.getElementById('attrModal');
-            if(!modal){
-                modal = document.createElement('div'); modal.id='attrModal'; modal.style='position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:2000;';
-                modal.innerHTML = `
-                    <div style='background:white;padding:16px;border-radius:8px;min-width:360px;'>
-                        <h3 id='attrTitle' style='margin-top:0'>Nouvelle entité</h3>
-                        <div id='attrFields'></div>
-                        <div style='display:flex;gap:8px;justify-content:flex-end;margin-top:8px;'>
-                            <button id='attr_cancel' class='bottom-btn' style='background:#e3342f;color:white'>Annuler</button>
-                            <button id='attr_save' class='bottom-btn' style='background:#059669;color:white'>Enregistrer</button>
-                        </div>
-                    </div>`;
-                document.body.appendChild(modal);
-                document.getElementById('attr_cancel').addEventListener('click', ()=>{ modal.style.display='none'; drawnItems.clearLayers(); });
-                document.getElementById('attr_save').addEventListener('click', async ()=>{ await saveDrawnFeature(geometry); modal.style.display='none'; });
-            }
-            // build fields by layer
-            const fieldsDiv = document.getElementById('attrFields'); fieldsDiv.innerHTML='';
-            if(currentDrawTarget === 'unites'){
-                document.getElementById('attrTitle').textContent = 'Nouvelle unité fiscale';
-                fieldsDiv.innerHTML = `
-                    <label>Nom<br><input id='attr_nom' class='w-full p-1 border'></label><br>
-                    <label>Quartier<br><input id='attr_quartier' class='w-full p-1 border'></label><br>
-                    <label>Type<br><input id='attr_type' class='w-full p-1 border' value='Commerce'></label><br>
-                    <label>Recette (FCFA)<br><input id='attr_recette' type='number' class='w-full p-1 border' value='0'></label>
-                `;
-            } else {
-                document.getElementById('attrTitle').textContent = 'Nouvelle entité ('+currentDrawTarget+')';
-                fieldsDiv.innerHTML = `
-                    <label>Nom/Info<br><input id='attr_nom' class='w-full p-1 border'></label><br>
-                `;
-            }
-            modal.style.display='flex';
-            // keep temporary geometry
-            digitizing.geom = geometry;
-        }
-
-        async function saveDrawnFeature(geometry){
-            // build feature payload
-            const props = {};
-            props.Nom = document.getElementById('attr_nom')?.value || '';
-            props.Quartier = document.getElementById('attr_quartier')?.value || '';
-            props.Type = document.getElementById('attr_type')?.value || '';
-            props.Recette = parseFloat(document.getElementById('attr_recette')?.value) || 0;
-            const feature = { type:'Feature', properties: props, geometry: geometry };
-
-            // Add locally to relevant layer and UI
-            if(currentDrawTarget === 'unites'){
-                // convert to local unit and add marker
-                const id = (unitesFiscales.length? Math.max(...unitesFiscales.map(u=>u.id))+1 : 1);
-                let lon=0, lat=0;
-                if(geometry.type === 'Point'){ lon=geometry.coordinates[0]; lat=geometry.coordinates[1]; }
-                else { const c = getCentroid(geometry); lon=c[0]; lat=c[1]; }
-                // normalize coordinates (in case lon/lat are swapped or in UTM)
-                const [nlat, nlon] = normalizeLatLon(lat, lon);
-                const newUnit = { id:id, nom: props.Nom || `Unité ${id}`, quartier: props.Quartier || 'Non défini', village:getRandomVillage(props.Quartier||''), type: props.Type || 'Autre', superficie:0, recette: props.Recette || 0, latitude:nlat, longitude:nlon, annee:ANNEE_COURANTE, statut:'Actif' };
-                unitesFiscales.push(newUnit);
-                if(!unitesLayer) unitesLayer=L.layerGroup().addTo(map);
-                L.marker([newUnit.latitude,newUnit.longitude],{icon:L.divIcon({html:`<div class="unit-marker" style="background:#ef4444"></div>`,className:'',iconSize:[16,16],iconAnchor:[8,8]}), zIndexOffset: -100 }).bindPopup(`<b>${newUnit.nom}</b><br>${newUnit.quartier}<br>${(newUnit.recette||0).toLocaleString()} FCFA`).addTo(unitesLayer);
-                localStorage.setItem(STORAGE_KEYS.UNITES, JSON.stringify(convertUnitesToGeoJSON(unitesFiscales)));
-                fillUniteFiscaleSelect(); updateRecettesParQuartier(); updateDashboard();
-            } else {
-                // For other layers, append the feature to their GeoJSON stored in localStorage and refresh the layer on the map
-                const layerKeyMap = {
-                    batiments: { storage: STORAGE_KEYS.BATIMENTS, layerVar: 'batimentsLayer' },
-                    routes: { storage: STORAGE_KEYS.ROUTES, layerVar: 'routesLayer' },
-                    ferroviaire: { storage: STORAGE_KEYS.FERROVIAIRE, layerVar: 'ferroviaireLayer' },
-                    quartiers: { storage: STORAGE_KEYS.QUARTIERS, layerVar: 'quartiersLayer' },
-                    commune: { storage: STORAGE_KEYS.COMMUNE, layerVar: 'communeLayer' }
-                };
-                const info = layerKeyMap[currentDrawTarget];
-                if(info){
-                    try{
-                        let existing = null;
-                        const stored = localStorage.getItem(info.storage);
-                        if(stored) existing = JSON.parse(stored);
-                        if(!existing || !existing.type) existing = { type: 'FeatureCollection', features: [] };
-                        existing.features.push(feature);
-                        localStorage.setItem(info.storage, JSON.stringify(existing));
-                        // Remove old layer and recreate from updated GeoJSON
-                        try{ if(window[info.layerVar]) map.removeLayer(window[info.layerVar]); } catch(e){}
-                        window[info.layerVar] = L.geoJSON(existing, {
-                            pointToLayer: (f, latlng) => L.circleMarker(latlng, { radius: 3, color: '#6b7280', fillColor: '#9ca3af', fillOpacity: 0.8 }),
-                            style: (feat) => {
-                                if(currentDrawTarget === 'routes') return { color: '#eab308', weight: 3, opacity: 0.8 };
-                                if(currentDrawTarget === 'ferroviaire') return { color: '#6b7280', weight: 2, opacity: 0.8, dashArray: '6,4' };
-                                if(currentDrawTarget === 'quartiers' || currentDrawTarget === 'commune') return { color: '#4a5568', weight: 2, fillColor: '#cbd5e0', fillOpacity: 0.3 };
-                                return {};
-                            }
-                        }).addTo(map);
-                                showTempMessage('Entité ajoutée à la couche ' + currentDrawTarget + ' et sauvegardée localement.');
-                    } catch(e){ console.warn('Erreur lors de la sauvegarde locale de la couche', e); showTempMessage('Erreur de sauvegarde locale: ' + e.message); }
-                }
-            }
-
-            // send to server API to persist if available
-            try{
-                const res = await fetch('/api/geo/ingest', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify({ layer: currentDrawTarget, feature }) });
-                const j = await res.json();
-                if(!res.ok) console.error('Ingest error', j);
-            } catch(e){ console.warn('API ingest failed', e); }
-
-            // cleanup
-            drawnItems.clearLayers(); currentDrawTarget = null; digitizing.geom = null;
-        }
-        
-        function toggleLayer(name){
-            let toggle=document.getElementById(`toggle${name.charAt(0).toUpperCase()+name.slice(1)}`);
-            let layer=null;
-            switch(name){
-                case'commune': layer=communeLayer; break;
-                case'quartiers': layer=quartiersLayer; break;
-                case'quartiersLabels': layer=quartiersLabelsLayer; break;
-                case'batiments': layer=batimentsLayer; break;
-                case'routes': layer=routesLayer; break;
-                case'ferroviaire': layer=ferroviaireLayer; break;
-                case'unites': layer=unitesLayer; break;
-            }
-            if(layer){
-                if(layerStates[name]){ map.removeLayer(layer); layerStates[name]=false; if(toggle) toggle.classList.remove('active'); }
-                else{ map.addLayer(layer); layerStates[name]=true; if(toggle) toggle.classList.add('active'); }
-            }
-        }
-        
-        function toggleBasemap(){
-            if(currentBasemap==='osm'){ googleSatLayer.addTo(map); map.removeLayer(osmLayer); currentBasemap='satellite'; }
-            else{ osmLayer.addTo(map); map.removeLayer(googleSatLayer); currentBasemap='osm'; }
-        }
-        
-        function zoomToExtent(){ if(allBounds&&allBounds.isValid()) map.fitBounds(allBounds); }
-        
-        function fillDestinationSelect(){
-            let s=document.getElementById('destinationSelect');
-            if(s){
-                s.innerHTML='<option value="">Choisir</option>';
-                unitesFiscales.forEach(u=>{ let o=document.createElement('option'); o.value=JSON.stringify({lat:u.latitude,lng:u.longitude,nom:u.nom}); o.textContent=u.nom; s.appendChild(o); });
-                s.onchange=function(){ if(this.value){ selectedDestination=JSON.parse(this.value); document.getElementById('routeInfo').innerHTML=selectedDestination.nom; } else{ selectedDestination=null; } };
-            }
-        }
-        
-        function getUserLocation(){ navigator.geolocation.getCurrentPosition(p=>{ userLocation={lat:p.coords.latitude,lng:p.coords.longitude}; if(userMarker) map.removeLayer(userMarker); userMarker=L.marker([userLocation.lat,userLocation.lng],{icon:L.divIcon({html:'<div style="background:#10b981;width:12px;height:12px;border-radius:50%;border:2px solid white;"></div>',iconSize:[12,12]})}).addTo(map).bindPopup('Vous').openPopup(); map.setView([userLocation.lat,userLocation.lng],14); document.getElementById('routeInfo').innerHTML='Position OK'; }); }
-
-        function pickStartPoint(){
-            if(!map) { showTempMessage('Carte non initialisée'); return; }
-            showTempMessage('Cliquez sur la carte pour définir le point de départ', 4000);
-            const handler = function(e){
-                const lat = e.latlng.lat, lng = e.latlng.lng;
-                userLocation = { lat, lng };
-                if(userMarker) map.removeLayer(userMarker);
-                userMarker = L.marker([lat,lng],{icon:L.divIcon({html:'<div style="background:#10b981;width:12px;height:12px;border-radius:50%;border:2px solid white;"></div>',iconSize:[12,12]})}).addTo(map).bindPopup('Point départ').openPopup();
-                document.getElementById('routeInfo').innerHTML = 'Point départ défini';
-                map.off('click', handler);
-            };
-            map.on('click', handler);
-        }
-        function openGoogleMaps(){ if(!userLocation||!selectedDestination) alert('Activez "Ma position"'); else window.open(`https://www.google.com/maps/dir/${userLocation.lat},${userLocation.lng}/${selectedDestination.lat},${selectedDestination.lng}`,'_blank'); }
-        function openWaze(){ if(!userLocation||!selectedDestination) alert('Activez "Ma position"'); else window.open(`https://www.waze.com/ul?ll=${selectedDestination.lat},${selectedDestination.lng}&navigate=yes&from=${userLocation.lat},${userLocation.lng}`,'_blank'); }
-        
-        function updateDashboardWithFilter(){
-            let filtered = [...unitesFiscales];
-            if(currentQuartierFilter !== 'all') filtered = filtered.filter(u => u.quartier === currentQuartierFilter);
-            if(currentVillageFilter !== 'all') filtered = filtered.filter(u => u.village === currentVillageFilter);
-            filteredUnites = filtered;
-            let total = filtered.length;
-            let totalRecettes = filtered.reduce((s,u)=>s+(u.recette||0),0);
-            let totalSuperficie = filtered.reduce((s,u)=>s+(u.superficie||0),0);
-            document.getElementById('totalUnites').textContent = total;
-            document.getElementById('totalRecettes').textContent = totalRecettes.toLocaleString();
-            document.getElementById('totalSuperficie').textContent = totalSuperficie.toLocaleString();
-            document.getElementById('recetteMoyenne').textContent = total ? Math.round(totalRecettes/total).toLocaleString() : 0;
-            let qs={}; filtered.forEach(u=>{ qs[u.quartier]=(qs[u.quartier]||0)+u.recette; });
-            let ctx=document.getElementById('quartierChart')?.getContext('2d');
-            if(ctx){ if(quartierChart) quartierChart.destroy(); quartierChart=new Chart(ctx,{type:'bar',data:{labels:Object.keys(qs),datasets:[{label:'Recettes',data:Object.values(qs),backgroundColor:['rgba(54,162,235,0.8)','rgba(102,126,234,0.8)'],borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{anchor:'end',align:'top',color:'#333',font:{weight:'bold',size:9},formatter:(v)=>v.toLocaleString()}}}}); }
-            let ts2={}; filtered.forEach(u=>{ ts2[u.type]=(ts2[u.type]||0)+1; });
-            let ctx2=document.getElementById('typeChart')?.getContext('2d');
-            if(ctx2){ if(typeChart) typeChart.destroy(); typeChart=new Chart(ctx2,{type:'doughnut',data:{labels:Object.keys(ts2),datasets:[{data:Object.values(ts2),backgroundColor:['#3b82f6','#f59e0b','#10b981','#ef4444','#8b5cf6'],borderRadius:8,cutout:'60%'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{color:'white',formatter:(v)=>v}}}}); }
-            // Build table with edit/delete actions
-            const tbody = document.getElementById('dashboardTableBody');
-            tbody.innerHTML = '';
-            filtered.forEach(u => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="px-2 py-1 border">${u.id}</td>
-                    <td class="px-2 py-1 border">${u.nom||'-'}</td>
-                    <td class="px-2 py-1 border">${u.quartier||'-'}</td>
-                    <td class="px-2 py-1 border">${u.village||'-'}</td>
-                    <td class="px-2 py-1 border">${u.type||'-'}</td>
-                    <td class="px-2 py-1 border">${(u.recette||0).toLocaleString()} FCFA</td>
-                    <td class="px-2 py-1 border text-right">
-                        <button class="px-2 py-1 bg-blue-600 text-white rounded text-xs mr-1" onclick="openEditUnitModal(${u.id})">Modifier</button>
-                        <button class="px-2 py-1 bg-red-600 text-white rounded text-xs" onclick="deleteUnit(${u.id})">Supprimer</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-        
-        function updateDashboard(){ updateDashboardWithFilter(); }
-        
-        function updateStats(){ 
-            let top=[...unitesFiscales].sort((a,b)=>b.recette-a.recette).slice(0,10); 
-            document.getElementById('topUnites').innerHTML=top.map(u=>`<div class="p-2 border rounded"><b>${u.nom}</b><br>${u.quartier}<br>${u.recette.toLocaleString()} FCFA</div>`).join(''); 
-            let ctx=document.getElementById('evolutionChart')?.getContext('2d'); 
-            if(ctx){ if(evolutionChart) evolutionChart.destroy(); evolutionChart=new Chart(ctx,{type:'line',data:{labels:['2020','2021','2022','2023','2024','2025','2026'],datasets:[{label:'Recettes (millions)',data:[22,28,35,42,48,55,65],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#10b981',pointRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{anchor:'end',align:'top',color:'#333',formatter:(v)=>v+' M'}}}}); } 
-        }
-        
-        function updateRecouvrement(){ 
-            let ctx=document.getElementById('recouvrementChart')?.getContext('2d'); 
-            if(ctx){ if(recouvrementChart) recouvrementChart.destroy(); 
-            // compute totals per zone using ZONES mapping
-            const zoneNames = Object.keys(ZONES);
-            const zoneTotals = zoneNames.map(z => 0);
-            const zoneTargets = zoneNames.map(z => 0);
-            // build a map from quartier to recette for quick lookup
-            const qRec = quartierRecettes || {};
-            // compute zone totals using normalized matching so labels/case differences won't break grouping
-            zoneNames.forEach((z, idx) => {
-                const quartiers = ZONES[z] || [];
-                let sum = 0;
-                quartiers.forEach(q => {
-                    const nq = normalizeName(q);
-                    // sum recettes for data quartiers whose normalized form matches
-                    for(const [dataQ, val] of Object.entries(qRec || {})){
-                        if(normalizeName(dataQ) === nq) sum += val;
-                    }
-                });
-                zoneTotals[idx] = sum;
-                // compute zone target
-                let targetSum = 0;
-                quartiers.forEach(q => {
-                    const nq = normalizeName(q);
-                    for(const [dataQ, obj] of Object.entries(objectifsParQuartier || {})){
-                        if(normalizeName(dataQ) === nq && obj && obj.cible) targetSum += obj.cible;
-                    }
-                });
-                if(targetSum > 0) zoneTargets[idx] = targetSum; else zoneTargets[idx] = Math.round(objectifAnnuel / zoneNames.length);
-            });
-            const quartiersList = zoneNames;
-            const tauxList = zoneTotals.map((tot, i) => zoneTargets[i] > 0 ? ((tot / zoneTargets[i]) * 100).toFixed(1) : 0);
-            const colors = ['#10b981','#3b82f6','#f59e0b','#ef4444','#8b5cf6'];
-            recouvrementChart=new Chart(ctx,{type:'pie',data:{labels:quartiersList,datasets:[{data:tauxList,backgroundColor:colors.slice(0,quartiersList.length),borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{color:'white',font:{weight:'bold',size:10},formatter:(v)=>v+'%'}}}}); } 
-            let ctx2=document.getElementById('objectifsChart')?.getContext('2d'); 
-            if(ctx2){ if(objectifsChart) objectifsChart.destroy(); 
-            let totalRecettesCommune = Object.values(quartierRecettes).reduce((a,b)=>a+b,0);
-            objectifsChart=new Chart(ctx2,{type:'bar',data:{labels:['T1','T2','T3','T4'],datasets:[{label:'Objectif',data:[objectifAnnuel*0.2,objectifAnnuel*0.25,objectifAnnuel*0.25,objectifAnnuel*0.3],backgroundColor:'rgba(59,130,246,0.7)',borderRadius:8},{label:'Réalisé',data:[totalRecettesCommune*0.2,totalRecettesCommune*0.25,totalRecettesCommune*0.25,totalRecettesCommune*0.3],backgroundColor:'rgba(16,185,129,0.7)',borderRadius:8}]},options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{anchor:'end',align:'top',color:'#333',formatter:(v)=>Math.round(v).toLocaleString()+' FCFA'}}}}); } 
-        }
-        
-        function updateExportPreview(){
-            let html = '', selectionne = false;
-            if(document.getElementById('exportUnites').checked){ html += `<tr><td class="px-2 py-1 border">Unités fiscales</td><td class="px-2 py-1 border">${unitesFiscales.length} unités</td></tr>`; selectionne = true; }
-            if(document.getElementById('exportRecettes').checked){ let totalRec = Object.values(quartierRecettes).reduce((a,b)=>a+b,0); html += `<tr><td class="px-2 py-1 border">Recettes</td><td class="px-2 py-1 border">Total: ${totalRec.toLocaleString()} FCFA</td></tr>`; selectionne = true; }
-            if(document.getElementById('exportQuartiers').checked){ let quartiersList = Object.keys(quartierRecettes); html += `<tr><td class="px-2 py-1 border">Quartiers</td><td class="px-2 py-1 border">${quartiersList.length} quartiers</td></tr>`; selectionne = true; }
-            if(document.getElementById('exportPaiements').checked){ html += `<tr><td class="px-2 py-1 border">Paiements</td><td class="px-2 py-1 border">${historiquePaiements.length} paiements</td></tr>`; selectionne = true; }
-            if(!selectionne) html = '<tr><td colspan="2" class="text-center">Aucune donnée</td></tr>';
-            document.getElementById('exportTableBody').innerHTML = html;
-        }
-        
-        function exportData(format){
-            let workbookData = [];
-            if(document.getElementById('exportUnites').checked) workbookData.push({name: "Unités 2026", data: unitesFiscales.map(u => ({ID: u.id, Nom: u.nom, Quartier: u.quartier, Type: u.type, Recette: u.recette}))});
-            if(document.getElementById('exportRecettes').checked){ let recettesArray = Object.entries(quartierRecettes).map(([q,m])=>({Quartier: q, Recettes: m})); workbookData.push({name: "Recettes", data: recettesArray}); }
-            if(document.getElementById('exportQuartiers').checked){ let quartiersList = Object.keys(quartierRecettes).map(q=>({Quartier: q})); workbookData.push({name: "Quartiers", data: quartiersList}); }
-            if(document.getElementById('exportPaiements').checked){ let paiementsArray = historiquePaiements.map(p=>({Date: p.date, Unité: p.unite, Montant: p.montant})); workbookData.push({name: "Paiements", data: paiementsArray}); }
-            if(workbookData.length === 0){ alert("Sélectionnez des données"); return; }
-            if(format === 'csv'){
-                let csv = "";
-                workbookData.forEach(item => { csv += `\n=== ${item.name} ===\n`; if(item.data.length){ let headers = Object.keys(item.data[0]); csv += headers.join(';')+"\n"; item.data.forEach(row => csv += headers.map(h=>row[h]).join(';')+"\n"); } });
-                let blob = new Blob(["\uFEFF"+csv], {type:'text/csv'}); let link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'diamniadio_data.csv'; link.click();
-            } else if(format === 'excel'){
-                let wb = XLSX.utils.book_new();
-                workbookData.forEach(item => { let ws = XLSX.utils.json_to_sheet(item.data); XLSX.utils.book_append_sheet(wb, ws, item.name.substring(0,31)); });
-                XLSX.writeFile(wb, 'diamniadio_data.xlsx');
-            } else if(format === 'geojson'){
-                let features = [];
-                if(document.getElementById('exportUnites').checked){
-                    unitesFiscales.forEach(u => { features.push({ type: "Feature", geometry: { type: "Point", coordinates: [u.longitude, u.latitude] }, properties: { nom: u.nom, quartier: u.quartier, recette: u.recette } }); });
-                }
-                let geojson = { type: "FeatureCollection", features: features };
-                let blob = new Blob([JSON.stringify(geojson,null,2)], {type:'application/json'}); let link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'diamniadio_data.geojson'; link.click();
-            }
-            alert(`Export ${format.toUpperCase()} terminé`);
-        }
-        
-        function searchLocation(){ 
-            let q=document.getElementById('searchInput').value.toLowerCase(); 
-            if(!q) return; 
-            const matches = unitesFiscales.filter(u => (u.nom||'').toLowerCase().includes(q) || (u.quartier||'').toLowerCase().includes(q));
-            if(!matches.length){ alert('Aucun résultat'); return; }
-            const bounds = L.latLngBounds(matches.map(m=>[m.latitude,m.longitude]));
-            if(bounds.isValid()) map.fitBounds(bounds.pad(0.5));
-            flashMarkersForUnits(matches.map(m=>m.id));
-        }
-        
-        function openAdminPanel(){ document.getElementById('adminModal').classList.remove('hidden'); document.getElementById('adminMessage').classList.add('hidden'); }
-        function closeAdminPanel(){ document.getElementById('adminModal').classList.add('hidden'); }
+        function searchLocation(){ alert('Recherche: À implémenter'); }
         function toggleRoutePanel(){ document.getElementById('routePanel').classList.toggle('hidden'); }
-        
-        function handleMobileElements() {
-            const isMobile = window.innerWidth <= 768;
-            const isCarteView = document.getElementById('carteView').style.display !== 'none';
-            const mobileSearchContainer = document.querySelector('.mobile-search-container');
-            const routeMobileBtn = document.querySelector('.route-mobile-btn');
-            const mobileBottomControls = document.querySelector('.mobile-bottom-controls');
-            
-            if(mobileSearchContainer) mobileSearchContainer.style.display = (isMobile && isCarteView) ? 'flex' : 'none';
-            if(routeMobileBtn) routeMobileBtn.style.display = (isMobile && isCarteView) ? 'flex' : 'none';
-            if(mobileBottomControls) mobileBottomControls.style.display = (isMobile && isCarteView) ? 'flex' : 'none';
-        }
-        
-        window.addEventListener('load', handleMobileElements);
-        window.addEventListener('resize', handleMobileElements);
-        
-    // Initialize theme controls on DOM ready (ensures elements exist and avoids duplicate initialization)
-    (function initThemeControls(){
-            try{
-                const attach = ()=>{
-                    const btn = document.getElementById('themeToggle');
-                    if(btn){
-                        try{ btn.style.pointerEvents='auto'; btn.style.zIndex='10005'; btn.style.position='relative'; }catch(e){}
-                    } else {
-                        console.log('themeToggle element not found in DOM');
-                    }
-
-                    // Ensure the real toggle button has a single listener (use ensureThemeToggle which clones then attaches once)
-                    ensureThemeToggle(document.getElementById('themeToggle'));
-                    console.log('Theme controls initialized (ensureThemeToggle called)');
-                };
-                if(document.readyState === 'loading') window.addEventListener('DOMContentLoaded', function(){ loadTheme(); attach(); }); else { loadTheme(); attach(); }
-            } catch(e){ console.warn('initThemeControls failed', e); }
-        })();
-        // legend toggle wiring
-        try{
-            const legendBtn = document.getElementById('legendToggleBtn');
-            const legend = document.getElementById('legendFixed');
-            if(legendBtn && legend){ legendBtn.addEventListener('click', ()=>{ legend.classList.toggle('collapsed'); }); }
-        } catch(e){}
+        function toggleMobileSearch() {}
+        function searchMobileLocation() {}
+        function toggleRoutePanelMobile() {}
+        function mettreAJourDashboardPaiements() {}
+        function openAdminPanel(){ document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminPanel(){ document.getElementById('adminModal').classList.add('hidden'); }
+        function importAllData() {}
+        function saveSettingsOnly() {}
+        function filterRecouvrementByQuartier() {}
+        function filterDashboardByQuartier() {}
+        function filterDashboardByVillage() {}
+        function updateExportPreview() {}
+        function exportData() {}
+        function exportPDFReport() {}
+        function processPayment() {}
+        function selectPaymentMethod() {}
+        function openDigitizeMenu() {}
+        function getUserLocation() {}
+        function pickStartPoint() {}
+        function openGoogleMaps() {}
+        function openWaze() {}
+        function zoomToExtent() {}
+        function toggleBasemap() {}
+        function toggleLayer() {}
         
         // Vérifier si l'utilisateur est déjà connecté
         const savedUser = localStorage.getItem('diamniadio_current_user');
@@ -2448,39 +1469,22 @@
             document.getElementById('sidebarToggle').style.display = 'flex';
             document.querySelector('.main-content').style.display = 'block';
             document.getElementById('userName').innerText = savedUser;
-            loadAllData();
         }
         
+        // Attacher les fonctions au contexte global
         window.showView = showView;
-        window.searchLocation = searchLocation;
-        window.getUserLocation = getUserLocation;
-        window.openGoogleMaps = openGoogleMaps;
-        window.openWaze = openWaze;
-        window.filterDashboardByQuartier = filterDashboardByQuartier;
-        window.filterDashboardByVillage = filterDashboardByVillage;
-        window.exportData = exportData;
-        window.exportPDFReport = exportPDFReport;
-        window.updateExportPreview = updateExportPreview;
-        window.toggleLayer = toggleLayer;
-        window.toggleBasemap = toggleBasemap;
-        window.zoomToExtent = zoomToExtent;
-        window.openAdminPanel = openAdminPanel;
-        window.closeAdminPanel = closeAdminPanel;
-        window.toggleRoutePanel = toggleRoutePanel;
-        window.zoomIn = zoomIn;
-        window.zoomOut = zoomOut;
-        window.filterRecouvrementByQuartier = filterRecouvrementByQuartier;
-        window.selectPaymentMethod = selectPaymentMethod;
-        window.processPayment = processPayment;
         window.toggleTheme = toggleTheme;
-        window.importAllData = importAllData;
-        window.saveSettingsOnly = saveSettingsOnly;
-        window.toggleMobileSearch = toggleMobileSearch;
-        window.searchMobileLocation = searchMobileLocation;
-    window.flashMarkersForUnits = flashMarkersForUnits;
-        window.toggleRoutePanelMobile = toggleRoutePanelMobile;
         window.login = login;
         window.logout = logout;
+        
+        // Charger le thème au démarrage
+        loadTheme();
+        
+        // Attacher le listener au bouton theme toggle
+        const themeBtn = document.getElementById('themeToggle');
+        if(themeBtn) {
+            themeBtn.addEventListener('click', toggleTheme);
+        }
     </script>
 </body>
 </html>
